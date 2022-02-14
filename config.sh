@@ -56,8 +56,8 @@ cp /root/mounting-with-systemd/*/etc/systemd/system
 #for network-online.target this unit has to be enabled
 systemctl enable systemd-networkd.service
 systemctl start systemd-networkd.service
-
-for unit in /root/mounting-with-systemd/*.automount;do
+cd /root/mounting-with-systemd/
+for unit in *.automount;do
 	systemctl enable $unit
 	systemctl start $unit
 done
