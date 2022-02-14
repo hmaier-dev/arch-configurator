@@ -7,7 +7,7 @@ echo -e "------------------------------------------------------------\n"
 
 read -e -p "Continue with the script? [y/n/q]" PROCEED 
 PROCCED=${PROCEED:-n}
-[ $PROCCED !== "y" ] && exit
+[ $PROCCED != "y" ] && exit
 
 p () {
 	pacman --noconfirm -S $1
@@ -42,7 +42,7 @@ mkdir -p /home/$username/networkshare/$uname
 
 echo -e "Connection to networkshare..."
 
-p "ntfs-3g"
+p "cifs-utils"
 
 mount.cifs //isilon/$uname	/home/$username/networkshare/$uname -o password=$password,username=$uname,uid=$(id -u),gid=$(id -g)
 
@@ -51,3 +51,4 @@ if [ -d "/home/$username/networkshare/$uname/linux-files" ]; then
 else
 	echo -e "No connection to the networkshare."
 fi
+
