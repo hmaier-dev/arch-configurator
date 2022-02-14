@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo -e "------------------------------------------------------------\n"
-echo -e "Welcome to self-configuring Arch!\n"
+echo -e "------------------------------------------------------------"
+echo -e "Welcome to self-configuring Arch!"
 echo -e "Run this script only on fresh installed systems."
 echo -e "------------------------------------------------------------\n"
 
@@ -50,11 +50,27 @@ else
 	exit
 fi
 
+echo -e "Copy unit-files for systemd-automount..."
+cp -r /home/$username/networkshare/$uname/linux-files/mounting-with-systemd /root
+cp /root/mounting-with-systemd/*/etc/systemd/system 
+#for network-online.target this unit has to be enabled
+systemctl enable systemd-networkd.service
+systemctl start systemd-networkd.service
+
+for unit in /root/mounting-with-systemd/*.automount;do
+	systemctl enable $unit
+	systemctl start $unit
+done
+
 echo -e "Downloading packages..."
 # take care: this will also read empty lines!
 while read -r i; do
 	p "$i"
 done < /home/$username/networkshare/$uname/linux-files/packages-list.txt
 
+cho
 
+#create a repo online
 echo -e "Copying config files..."
+
+
