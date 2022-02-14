@@ -52,7 +52,7 @@ fi
 
 echo -e "Copy unit-files for systemd-automount..."
 cp -r /home/$username/networkshare/$uname/linux-files/mounting-with-systemd /root
-cp /root/mounting-with-systemd/*/etc/systemd/system 
+cp /root/mounting-with-systemd/* /etc/systemd/system 
 #for network-online.target this unit has to be enabled
 systemctl enable systemd-networkd.service
 systemctl start systemd-networkd.service
