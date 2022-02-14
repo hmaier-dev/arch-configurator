@@ -62,15 +62,16 @@ for unit in /root/mounting-with-systemd/*.automount;do
 	systemctl start $unit
 done
 
-echo -e "Downloading packages..."
-# take care: this will also read empty lines!
-while read -r i; do
-	p "$i"
-done < /home/$username/networkshare/$uname/linux-files/packages-list.txt
-
-cho
-
-#create a repo online
-echo -e "Copying config files..."
 
 
+#echo -e "Downloading packages..."
+## take care: this will also read empty lines!
+#while read -r i; do
+#	p "$i"
+#done < /home/$username/networkshare/$uname/linux-files/packages-list.txt
+#
+#
+##create a repo online
+#echo -e "Copying config files..."
+#
+#
