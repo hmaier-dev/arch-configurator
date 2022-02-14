@@ -44,7 +44,7 @@ echo -e "Connection to networkshare..."
 
 p "cifs-utils"
 
-mount.cifs //isilon/$uname	/home/$username/networkshare/$uname -o password=$password,username=$uname,uid=$(id -u),gid=$(id -g)
+mount.cifs //isilon/Member_Home	/home/$username/networkshare/$uname -o pass=$password,user=$uname,uid=$userid,gid=$userid
 
 if [ -d "/home/$username/networkshare/$uname/linux-files" ]; then
 	echo -e "Successful connection to the networkshare!"
