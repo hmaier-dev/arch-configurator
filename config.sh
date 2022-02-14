@@ -20,12 +20,8 @@ read -p "Enter preferred user id [1001]: " userid
 userid=${userid:-1001}
 echo -e "\n"
 
-
 read -p "Enter domain username: " uname
-echo -e "\n"
-
-read -p "Enter domain password: " password
-echo -e "\n"
+read -s -p "Enter domain password: " password
 
 echo -e "Creating User..."
 useradd -m --uid 1001 -G wheel $username
@@ -48,7 +44,13 @@ mount.cifs //isilon/Member_Home	/home/$username/networkshare/$uname -o pass=$pas
 
 if [ -d "/home/$username/networkshare/$uname/linux-files" ]; then
 	echo -e "Successful connection to the networkshare!"
+	mkdir -p /home/$username/networkshare/IPB
+	mount.cifs //isilon/IPB	/home/$username/networkshare/IPB -o pass=$password,user=$uname,uid=$userid,gid=$userid
+	mkdir -p /home/$username/networkshare/AdmIn
+	mount.cifs //isilon/workspace /home/$username/networkshare/AdmIn -o pass=$password,user=$uname,uid=$userid,gid=$userid
+
 else
 	echo -e "No connection to the networkshare."
+	exit
 fi
 
