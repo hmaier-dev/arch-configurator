@@ -51,21 +51,24 @@ else
 fi
 
 echo -e "Copy unit-files for systemd-automount..."
-# coyping credentials
+# copying credentials
 touch /home/hmaier/.isilon_access
 echo "username=$uname" >> .isilon_access
 echo "pass=$password" >> .isilon_access
 chmod 600 ~/.isilon_access # just root can read/write this file
+
 # copying all mount and automount units
 cp -r /home/$username/networkshare/$uname/linux-files/mounting-with-systemd /root
 cp /root/mounting-with-systemd/* /etc/systemd/system 
+
 #for network-online.target this unit has to be enabled
 systemctl enable systemd-networkd.service
 systemctl start systemd-networkd.service
+# change the unit files "options=" individually?
 cd /root/mounting-with-systemd/
 for unit in *.automount;do
-	echo -e "Enabling service for $unit."
-	systemctl enable $unit
+	echo -e "Enabling service for $unit.\n"
+	systemctl enable --quiet $unit
 #	systemctl start $unit
 done
 
@@ -79,6 +82,12 @@ done < /home/$username/networkshare/$uname/linux-files/packages-list.txt
 
 
 echo -e "Copying config files..."
+cd /home/$username/
+mkdir  repos
+cd repos
+git clone git@github.com:hmaier-ipb/dotfiles.git
+cp -r dotfiles/* /home/$username/
 
-
+echo -e "Base Configuration finished."
+echo -e "Reboot the System and install AUR packages."
 
