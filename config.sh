@@ -81,6 +81,7 @@ mkdir  repos
 cd repos
 git clone https://github.com/hmaier-ipb/dotfiles.git
 cp -r dotfiles/* /home/$username/
+rm -r /home/$username/.git
 
 echo -e "Base Configuration finished."
 echo -e "Reboot the System and install AUR packages."
