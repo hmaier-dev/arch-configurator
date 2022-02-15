@@ -95,11 +95,12 @@ echo -e "Downloading packages..."
 # take care: this will also read empty lines!
 while read -r i; do
 	p "$i"
-done < /home/$username/networkshare/$uname/linux-files/packages-list.txt
+done < packages-list.txt
 
 #echo -e "Enabling lightdm display manager."
 #systemctl enable lightdm --quiet
 
+# suoders file can just get changed when sudo is installed!
 echo -e "Changing the sudoers file..."
 sed -i '82i %wheel ALL=(ALL) ALL' /etc/sudoers
 sed -i '83d' /etc/sudoers
