@@ -28,6 +28,10 @@ read -s -p "Enter domain password: " password
 echo -e "Creating User..."
 useradd -m --uid 1001 -G wheel $username
 
+echo -e "Changing sudoers file."
+sed -i '82i %wheel ALL=(ALL) ALL' /etc/sudoers
+sed -i '83d' /etc/sudoers
+
 echo -e "Changing password of $username"
 passwd $username
 
@@ -72,7 +76,7 @@ systemctl start systemd-networkd.service --quiet
 # change the unit files "options=" individually?
 cd /root/mounting-with-systemd/
 for unit in *.automount;do
-	echo -e "Enabling service for $unit.\n"
+	echo -e "Enabling service for $unit."
 	systemctl enable $unit --quiet
 #	systemctl start $unit
 done
