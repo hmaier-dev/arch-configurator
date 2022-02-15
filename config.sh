@@ -28,6 +28,8 @@ read -s -p "Enter domain password: " password
 echo -e "Creating User..."
 useradd -m --uid 1001 -G wheel $username
 
+p "sudo"
+
 echo -e "Changing sudoers file."
 sed -i '82i %wheel ALL=(ALL) ALL' /etc/sudoers
 sed -i '83d' /etc/sudoers
