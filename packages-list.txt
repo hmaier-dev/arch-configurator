@@ -15,9 +15,6 @@ htop
 dmenu
 openssh
 remmina
-lightdm
-lightdm-gtk-greeter
-lightdm-gtk-greeter-settings
 wmname
 timeshift
 scrot
