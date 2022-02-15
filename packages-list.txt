@@ -1,6 +1,5 @@
 bspwm
 sxhkd
-sudo
 exa
 rsync
 locate
