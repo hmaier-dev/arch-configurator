@@ -10,7 +10,7 @@ PROCCED=${PROCEED:-n}
 [ $PROCCED != "y" ] && exit
 
 p () {
-	pacman --noconfirm -S $1
+	pacman --noconfirm -Sq $1
 }
 
 read -p "Enter local username: " username
@@ -33,7 +33,7 @@ mkdir -p /home/$username/networkshare
 mkdir -p /home/$username/networkshare/$uname
 
 echo -e "Connection to networkshare..."
-
+# for mounting the networkshare, this package is needed
 p "cifs-utils"
 
 mount.cifs //isilon/Member_Home	/home/$username/networkshare/$uname -o pass=$password,user=$uname,uid=$userid,gid=$userid
@@ -51,8 +51,12 @@ else
 fi
 
 echo -e "Copy unit-files for systemd-automount..."
-cp /home/$username/networkshare/$uname/linux-files/isilon_access /home/hmaier/.isilon_access
-chmod 600 ~/.isilon_access # just root can read/write thsi file
+# coyping credentials
+touch /home/hmaier/.isilon_access
+echo "username=$uname" >> .isilon_access
+echo "pass=$password" >> .isilon_access
+chmod 600 ~/.isilon_access # just root can read/write this file
+# copying all mount and automount units
 cp -r /home/$username/networkshare/$uname/linux-files/mounting-with-systemd /root
 cp /root/mounting-with-systemd/* /etc/systemd/system 
 #for network-online.target this unit has to be enabled
@@ -67,14 +71,14 @@ done
 
 
 
-#echo -e "Downloading packages..."
-## take care: this will also read empty lines!
-#while read -r i; do
-#	p "$i"
-#done < /home/$username/networkshare/$uname/linux-files/packages-list.txt
-#
-#
-##create a repo online
-#echo -e "Copying config files..."
-#
-#
+echo -e "Downloading packages..."
+# take care: this will also read empty lines!
+while read -r i; do
+	p "$i"
+done < /home/$username/networkshare/$uname/linux-files/packages-list.txt
+
+
+echo -e "Copying config files..."
+
+
+
