@@ -104,6 +104,10 @@ echo -e "Changing the sudoers file..."
 sed -i '82i %wheel ALL=(ALL) ALL' /etc/sudoers
 sed -i '83d' /etc/sudoers
 
+echo -e "Removing the beep sound..."
+rmmod pcspkr
+echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
+
 echo -e "You can reboot your system now."
 echo -e "Thank you for running the arch-configurator!"
 
