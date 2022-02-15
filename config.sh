@@ -35,7 +35,7 @@ echo -e "Creating a credentials file..."
 touch /home/$username/.isilon_access
 echo "username=$uname" >> .isilon_access
 echo "pass=$password" >> .isilon_access
-chmod 600 ~/.isilon_access # just root can read/write this file
+chmod 600 /home/$username/.isilon_access # just root can read/write this file
 
 echo -e "Creating networkshare directorys..."
 
