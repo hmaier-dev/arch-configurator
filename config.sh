@@ -51,6 +51,8 @@ else
 fi
 
 echo -e "Copy unit-files for systemd-automount..."
+cp /home/$username/networkshare/$uname/linux-files/isilon_access /home/hmaier/.isilon_access
+chmod 600 ~/.isilon_access # just root can read/write thsi file
 cp -r /home/$username/networkshare/$uname/linux-files/mounting-with-systemd /root
 cp /root/mounting-with-systemd/* /etc/systemd/system 
 #for network-online.target this unit has to be enabled
