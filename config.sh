@@ -73,7 +73,7 @@ systemctl start systemd-networkd.service
 cd /root/mounting-with-systemd/
 for unit in *.automount;do
 	echo -e "Enabling service for $unit.\n"
-	systemctl enable $unit >/dev/null 2>&1
+	systemctl enable $unit --quiet
 #	systemctl start $unit
 done
 
@@ -98,6 +98,6 @@ while read -r i; do
 	p "$i"
 done < /home/$username/networkshare/$uname/linux-files/packages-list.txt
 
-echo -e "Thank you for running, the arch-configurator!"
+echo -e "Thank you for running the arch-configurator!"
 
 shopt -u dotglob # for don't considering dot files (turn off dot files)
