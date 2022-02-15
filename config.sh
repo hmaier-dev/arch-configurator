@@ -27,6 +27,12 @@ useradd -m --uid 1001 -G wheel $username
 echo -e "Changing password of $username"
 passwd $username
 
+echo -e "Creating a credentials file..."
+touch /home/$username/.isilon_access
+echo "username=$uname" >> .isilon_access
+echo "pass=$password" >> .isilon_access
+chmod 600 ~/.isilon_access # just root can read/write this file
+
 echo -e "Creating networkshare directorys..."
 
 mkdir -p /home/$username/networkshare
@@ -51,11 +57,6 @@ else
 fi
 
 echo -e "Copy unit-files for systemd-automount..."
-# copying credentials
-touch /home/hmaier/.isilon_access
-echo "username=$uname" >> .isilon_access
-echo "pass=$password" >> .isilon_access
-chmod 600 ~/.isilon_access # just root can read/write this file
 
 # copying all mount and automount units
 cp -r /home/$username/networkshare/$uname/linux-files/mounting-with-systemd /root
@@ -82,11 +83,10 @@ done < /home/$username/networkshare/$uname/linux-files/packages-list.txt
 
 
 echo -e "Copying config files..."
-p "openssh"
 cd /home/$username/
 mkdir  repos
 cd repos
-git clone git@github.com:hmaier-ipb/dotfiles.git
+git clone https://github.com/hmaier-ipb/dotfiles.git
 cp -r dotfiles/* /home/$username/
 
 echo -e "Base Configuration finished."
