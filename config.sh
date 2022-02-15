@@ -10,7 +10,7 @@ PROCCED=${PROCEED:-n}
 [ $PROCCED != "y" ] && exit
 
 p () {
-	pacman --noconfirm -Sq $1
+	pacman --noconfirm --quiet -S $1
 }
 
 read -p "Enter local username: " username
@@ -82,6 +82,7 @@ done < /home/$username/networkshare/$uname/linux-files/packages-list.txt
 
 
 echo -e "Copying config files..."
+p "openssh"
 cd /home/$username/
 mkdir  repos
 cd repos
