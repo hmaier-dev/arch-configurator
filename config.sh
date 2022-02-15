@@ -22,14 +22,14 @@ read -p "Enter local username: " username
 read -p "Enter preferred user id [1001]: " userid
 userid=${userid:-1001}
 
-read -p "Enter domain username: " uname
-read -s -p "Enter domain password: " password
-
 echo -e "Creating User..."
 useradd -m --uid 1001 -G wheel $username
 
 echo -e "Changing password of $username"
 passwd $username
+
+read -p "Enter domain username: " uname
+read -s -p "Enter domain password: " password
 
 echo -e "Creating a credentials file..."
 touch /home/$username/.isilon_access
@@ -101,8 +101,8 @@ done < /home/$username/networkshare/$uname/linux-files/packages-list.txt
 #systemctl enable lightdm --quiet
 
 echo -e "Changing the sudoers file..."
-sed -i '82i %wheel ALL=(ALL) ALL' sudoers
-sed -i '83d' sudoers
+sed -i '82i %wheel ALL=(ALL) ALL' /etc/sudoers
+sed -i '83d' /etc/sudoers
 
 echo -e "You can reboot your system now."
 echo -e "Thank you for running the arch-configurator!"
