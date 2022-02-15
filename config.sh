@@ -58,6 +58,7 @@ systemctl enable systemd-networkd.service
 systemctl start systemd-networkd.service
 cd /root/mounting-with-systemd/
 for unit in *.automount;do
+	echo -e "Enabling service for $unit."
 	systemctl enable $unit
 	systemctl start $unit
 done
