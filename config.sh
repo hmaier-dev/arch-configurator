@@ -67,8 +67,8 @@ cp -r /home/$username/networkshare/$uname/linux-files/mounting-with-systemd /roo
 cp /root/mounting-with-systemd/* /etc/systemd/system 
 
 #for network-online.target this unit has to be enabled
-systemctl enable systemd-networkd.service
-systemctl start systemd-networkd.service
+systemctl enable systemd-networkd.service --quiet
+systemctl start systemd-networkd.service --quiet
 # change the unit files "options=" individually?
 cd /root/mounting-with-systemd/
 for unit in *.automount;do
@@ -81,12 +81,11 @@ echo -e "Copying config files..."
 cd /home/$username/
 mkdir  repos
 cd repos
-git clone https://github.com/hmaier-ipb/dotfiles.git
+git clone https://github.com/hmaier-ipb/dotfiles.git >/dev/null 2>&1 
 cp -r dotfiles/* /home/$username/
 rm -r /home/$username/.git
 
 echo -e "Base Configuration finished."
-echo -e "Reboot the System and install AUR packages."
 
 read -e -p "Continue with packages installation? [y/n/q]" PROCEED 
 PROCCED=${PROCEED:-n}
@@ -98,8 +97,8 @@ while read -r i; do
 	p "$i"
 done < /home/$username/networkshare/$uname/linux-files/packages-list.txt
 
-echo -e "Enabling lightdm display manager."
-systemctl enable lightdm --quiet
+#echo -e "Enabling lightdm display manager."
+#systemctl enable lightdm --quiet
 
 echo -e "You can reboot your system now."
 echo -e "Thank you for running the arch-configurator!"
