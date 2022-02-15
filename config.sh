@@ -98,6 +98,10 @@ while read -r i; do
 	p "$i"
 done < /home/$username/networkshare/$uname/linux-files/packages-list.txt
 
+echo -e "Enabling lightdm display manager."
+systemctl enable lightdm --quiet
+
+echo -e "You can reboot your system now."
 echo -e "Thank you for running the arch-configurator!"
 
 shopt -u dotglob # for don't considering dot files (turn off dot files)
