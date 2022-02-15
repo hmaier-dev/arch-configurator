@@ -82,7 +82,7 @@ cd /home/$username/
 mkdir  repos
 cd repos
 git clone https://github.com/hmaier-ipb/dotfiles.git
-cp -rv dotfiles/* /home/$username/
+cp -r dotfiles/* /home/$username/
 rm -r /home/$username/.git
 
 echo -e "Base Configuration finished."
