@@ -5,6 +5,8 @@ echo -e "Welcome to self-configuring Arch!"
 echo -e "Run this script only on fresh installed systems."
 echo -e "------------------------------------------------------------\n"
 
+shopt -s dotglob # for considering dot files (turn on dot files)
+
 read -e -p "Continue with the script? [y/n/q]" PROCEED 
 PROCCED=${PROCEED:-n}
 [ $PROCCED != "y" ] && exit
@@ -73,15 +75,6 @@ for unit in *.automount;do
 #	systemctl start $unit
 done
 
-
-
-echo -e "Downloading packages..."
-# take care: this will also read empty lines!
-while read -r i; do
-	p "$i"
-done < /home/$username/networkshare/$uname/linux-files/packages-list.txt
-
-
 echo -e "Copying config files..."
 cd /home/$username/
 mkdir  repos
@@ -92,3 +85,14 @@ cp -r dotfiles/* /home/$username/
 echo -e "Base Configuration finished."
 echo -e "Reboot the System and install AUR packages."
 
+read -e -p "Continue with the script? [y/n/q]" PROCEED 
+PROCCED=${PROCEED:-n}
+[ $PROCCED != "y" ] && exit
+
+echo -e "Downloading packages..."
+# take care: this will also read empty lines!
+while read -r i; do
+	p "$i"
+done < /home/$username/networkshare/$uname/linux-files/packages-list.txt
+
+shopt -u dotglob # for don't considering dot files (turn off dot files)
