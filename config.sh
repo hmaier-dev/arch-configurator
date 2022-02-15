@@ -11,8 +11,10 @@ read -e -p "Continue with the script? [y/n/q]" PROCEED
 PROCCED=${PROCEED:-n}
 [ $PROCCED != "y" ] && exit
 
-p () {
-	pacman --noconfirm --quiet -S $1
+# no need to accept a package, don't reinstall already up to date programms, quieten the output
+p () { 
+	echo -e "Installing package: $1"
+	pacman --noconfirm --needed -S $1 >/dev/null 2>&1
 }
 
 read -p "Enter local username: " username
@@ -71,7 +73,7 @@ systemctl start systemd-networkd.service
 cd /root/mounting-with-systemd/
 for unit in *.automount;do
 	echo -e "Enabling service for $unit.\n"
-	systemctl enable --quiet $unit
+	systemctl enable $unit --quiet
 #	systemctl start $unit
 done
 
@@ -80,13 +82,13 @@ cd /home/$username/
 mkdir  repos
 cd repos
 git clone https://github.com/hmaier-ipb/dotfiles.git
-cp -r dotfiles/* /home/$username/
+cp -rv dotfiles/* /home/$username/
 rm -r /home/$username/.git
 
 echo -e "Base Configuration finished."
 echo -e "Reboot the System and install AUR packages."
 
-read -e -p "Continue with the script? [y/n/q]" PROCEED 
+read -e -p "Continue with packages installation? [y/n/q]" PROCEED 
 PROCCED=${PROCEED:-n}
 [ $PROCCED != "y" ] && exit
 
