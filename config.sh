@@ -99,7 +99,6 @@ cd /home/.config/nvim
 chown -R $username:$username /home/.config/nvim
 install --owner=$username --group=$username dotfiles/.config/nvim/init.vim .
 
-
 install --owner=$username --group=$username dotfiles/.bashrc /home/$username/.config
 install --owner=$username --group=$username dotfiles/.bashrc /home/$username
 install --owner=$username --group=$username dotfiles/.bash_aliases /home/$username
@@ -138,6 +137,13 @@ echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 echo -e "Creating work directorys..."
 mkdir /home/$username/Dokumente
 mkdir /home/$username/Bilder
+
+echo -e "Initalizing bare git repo for dotfiles..."
+mkdir -p /home/$username/repos/dotfiles
+git init --bare /home/$username/repos/dotfiles
+# dfr (DotFilesRepo) is an alias for git
+dfr config --local status.showUntrackedFiles no
+dfr pull
 
 echo -e "You can reboot your system now."
 echo -e "Thank you for running the arch-configurator!"
