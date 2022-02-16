@@ -94,7 +94,7 @@ chown -R $username:$username /home/$username/.config/sxhkd
 chown -R $username:$username /home/$username/.config/nvim
 
 cd /home/$username/.config/bspwm
-install --owner=$username --group=$username /root/dotfiles/.config/bspwmrc .
+install --owner=$username --group=$username /root/dotfiles/.config/bspwm/bspwmrc .
 
 cd /home/$username/.config/sxhkd
 install --owner=$username --group=$username /root/dotfiles/.config/sxhkd/sxhkdrc .
@@ -102,14 +102,15 @@ install --owner=$username --group=$username /root/dotfiles/.config/sxhkd/sxhkdrc
 cd /home/$username/.config/nvim
 install --owner=$username --group=$username /root/dotfiles/.config/nvim/init.vim .
 
+install --owner=$username --group=$username /root/dotfiles/.bashrc /home/$username
 install --owner=$username --group=$username /root/dotfiles/.bash_aliases /home/$username
 install --owner=$username --group=$username /root/dotfiles/.ideavimrc /home/$username
 install --owner=$username --group=$username /root/dotfiles/.vimrc /home/$username
 
 chown -R $username /home/$username/.config
 
-
-install --owner=$username --group=$username /root/arch-configurator/bare-git.sh home/$username
+cp /root/arch-configurator/bare-git.sh /homer/$username
+chown $username /home/$username/bare-git.sh
 
 echo -e "Base Configuration finished."
 
@@ -146,6 +147,7 @@ mkdir /home/$username/Dokumente
 chown $username /home/$username/Dokumente
 mkdir /home/$username/Bilder
 chown $username /home/$username/Bilder
+
 
 
 echo -e "You can reboot your system now."
