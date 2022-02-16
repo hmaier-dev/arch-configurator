@@ -31,7 +31,8 @@ passwd $username
 read -p "Enter domain username: " uname
 read -s -p "Enter domain password: " password
 
-echo -e "Creating a credentials file..."
+
+echo -e "\nCreating a credentials file..."
 touch /home/$username/.isilon_access
 echo "username=$uname" >> .isilon_access
 echo "pass=$password" >> .isilon_access
@@ -83,8 +84,13 @@ cd /home/$username/
 mkdir  repos
 cd repos
 git clone https://github.com/hmaier-ipb/dotfiles.git >/dev/null 2>&1 
-install --owner=hmaier -r dotfiles/* /home/$username/
-rm -r /home/$username/.git
+install --owner=hmaier dotfiles/.config /home/$username
+install --owner=hmaier dotfiles/.bashrc /home/$username
+install --owner=hmaier dotfiles/.bash_aliases /home/$username
+install --owner=hmaier dotfiles/.ideavimrc /home/$username
+install --owner=hmaier dotfiles/.vimrc /home/$username
+
+
 
 echo -e "Base Configuration finished."
 
