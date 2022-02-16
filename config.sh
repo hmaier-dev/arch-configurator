@@ -111,7 +111,7 @@ mkdir -p /home/$username/repos/dotfiles
 git config --global init.defaultBranch main
 git init --bare /home/$username/repos/dotfiles
 /usr/bin/git --git-dir=/home/$username/repos/dotfiles/ --work-tree=/home/$username config --local status.showUntrackedFiles no
-/usr/bin/git --git-dir=/home/$username/repos/dotfiles/ --work-tree=/home/$username branch --set-upstream-to=git@github.com:hmaier-ipb/dotfiles.git/main
+/usr/bin/git --git-dir=/home/$username/repos/dotfiles/ --work-tree=/home/$username branch --set-upstream-to=git@github.com:hmaier-ipb/dotfiles.git
 
 
 echo -e "Base Configuration finished."
