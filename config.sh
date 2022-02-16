@@ -115,7 +115,6 @@ echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 echo -e "Creating work directorys..."
 mkdir /home/$username/Dokumente
 mkdir /home/$username/Bilder
-mkdir /home/$username/workspace
 
 echo -e "You can reboot your system now."
 echo -e "Thank you for running the arch-configurator!"
