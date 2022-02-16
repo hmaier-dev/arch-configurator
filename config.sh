@@ -95,8 +95,8 @@ chown -R $username:$username /home/.config/sxhkd
 install --owner=$username --group=$username dotfiles/.config/sxhkd/sxhkdrc .
 
 mkdir /home/.config/nvim
-chown -R $username:$username /home/.config/nvim
 cd /home/.config/nvim
+chown -R $username:$username /home/.config/nvim
 install --owner=$username --group=$username dotfiles/.config/nvim/init.vim .
 
 
