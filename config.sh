@@ -84,18 +84,18 @@ done
 echo -e "Copying config files and changing permissions..."
 git clone https://github.com/hmaier-ipb/dotfiles.git >/dev/null 2>&1 
 
-mkdir /home/.config/bspwm
-cd /home/.config/bspwm
+mkdir /home/$username/.config/bspwm
+cd /home/$username/.config/bspwm
 chown -R $username:$username /home/$username/.config/bspwm
 install --owner=$username --group=$username dotfiles/.config/bspwmrc .
 
-mkdir /home/.config/sxhkd
-cd /home/.config/sxhkd
+mkdir /home/$username/.config/sxhkd
+cd /home/$username/.config/sxhkd
 chown -R $username:$username /home/$username/.config/sxhkd
 install --owner=$username --group=$username dotfiles/.config/sxhkd/sxhkdrc .
 
-mkdir /home/.config/nvim
-cd /home/.config/nvim
+mkdir /home/$username/.config/nvim
+cd /home/$username/.config/nvim
 chown -R $username:$username /home/$username/.config/nvim
 install --owner=$username --group=$username dotfiles/.config/nvim/init.vim .
 
