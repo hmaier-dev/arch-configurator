@@ -17,10 +17,10 @@ echo -e "Creating bare git repo..."
 git config --global init.defaultBranch main
 git init --bare /home/$u/repos/dotfiles
 
-git=/usr/bin/git --git-dir=/home/$u/repos/dotfiles/ --work-tree=/home/$u
-$git config --local status.showUntrackedFiles no
-$git remote add origin git@github.com:hmaier-ipb/dotfiles.git
-$git branch --set-upstream-to=origin/main main
+/usr/bin/git --git-dir=/home/$u/repos/dotfiles/ --work-tree=/home/$u config --local status.showUntrackedFiles no
+/usr/bin/git --git-dir=/home/$u/repos/dotfiles/ --work-tree=/home/$u
+remote add origin git@github.com:hmaier-ipb/dotfiles.git
+#/usr/bin/git --git-dir=/home/$u/repos/dotfiles/ --work-tree=/home/$u branch --set-upstream-to=origin/main main
 
 #echo -e "Adding your public ssh key to github..."
 #read -p "Enter username for github: " user
@@ -40,5 +40,7 @@ done
 echo -e "Writing your public ssh-key to networkshare..."
 cp /home/$u/.ssh/id_rsa.pub /home/$u/networkshare/hmaier/linux-files/public_ssh_key.txt
 
+echo -e "Creating temporary DotFilesRepo (dfr) alias..."
+alias dfr='/usr/bin/git --git-dir=/home/$u/repos/dotfiles/ --work-tree=/home/$u'
 
 echo -e "Thank you for organizing dotfiles!"
