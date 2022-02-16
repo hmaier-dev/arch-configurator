@@ -20,10 +20,20 @@ git init --bare /home/$u/repos/dotfiles
 /usr/bin/git --git-dir=/home/$u/repos/dotfiles/ --work-tree=/home/$u config --local status.showUntrackedFiles no
 /usr/bin/git --git-dir=/home/$u/repos/dotfiles/ --work-tree=/home/$u remote add origin git@github.com:hmaier-ipb/dotfiles.git
 
-echo -e "Adding your public ssh key to github..."
-read -p "Enter username for github: " user
-read -p -s "Enter password for github: " pass
+#echo -e "Adding your public ssh key to github..."
+#read -p "Enter username for github: " user
+#read -s -p "Enter password for github: " pass
+#
+#echo -e "Contacting the github-api...\n"
+#
+#curl -u "$user:$pass" --data '{"title":"$user@$hostname","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' https://api.github.com/$user/keys
+#
+echo -e "Writing your public ssh-key to networkshare..."
 
-curl -u "$user:$pass" --data '{"title":"$user@$hostname","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' https://api.github.com/user/keys
+if [ -f /home/$u/.ssh/id_rsa.pub ]; then
+	cp /home/$u/.ssh/id_rsa.pub /home/$u/networkshare/hmaier/linux-files/public_ssh_key.txt
+else
+	ssh-keygen
+fi
 
 echo -e "Thank you for organizing dotfiles!"
