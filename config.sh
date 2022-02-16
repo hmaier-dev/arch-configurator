@@ -83,6 +83,7 @@ cd /home/$username/
 mkdir  repos
 cd repos
 git clone https://github.com/hmaier-ipb/dotfiles.git >/dev/null 2>&1 
+chown -hR hmaier ./dotfiles/
 cp -r dotfiles/* /home/$username/
 rm -r /home/$username/.git
 
