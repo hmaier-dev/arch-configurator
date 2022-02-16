@@ -96,7 +96,7 @@ echo -e "Downloading packages..."
 # take care: this will also read empty lines!
 while read -r i; do
 	p "$i"
-done < ./packages-list.txt
+done < $PWD/packages-list.txt
 
 #echo -e "Enabling lightdm display manager."
 #systemctl enable lightdm --quiet
