@@ -109,7 +109,7 @@ install --owner=$username --group=$username /root/dotfiles/.vimrc /home/$usernam
 
 chown -R $username /home/$username/.config
 
-cp /root/arch-configurator/bare-git.sh /homer/$username
+cp /root/arch-configurator/bare-git.sh /home/$username
 chown $username /home/$username/bare-git.sh
 
 echo -e "Base Configuration finished."
