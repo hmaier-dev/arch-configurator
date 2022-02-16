@@ -96,7 +96,7 @@ echo -e "Downloading packages..."
 # take care: this will also read empty lines!
 while read -r i; do
 	p "$i"
-done < $PWD/packages-list.txt
+done < /root/arch-configurator/packages-list.txt
 
 #echo -e "Enabling lightdm display manager."
 #systemctl enable lightdm --quiet
@@ -111,6 +111,11 @@ sed -i '83d' /etc/sudoers
 echo -e "Removing the beep sound..."
 rmmod pcspkr
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
+
+echo -e "Creating work directorys..."
+mkdir /home/$username/Dokumente
+mkdir /home/$username/Bilder
+mkdir /home/$username/workspace
 
 echo -e "You can reboot your system now."
 echo -e "Thank you for running the arch-configurator!"
