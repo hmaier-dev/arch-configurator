@@ -20,5 +20,10 @@ git init --bare /home/$u/repos/dotfiles
 /usr/bin/git --git-dir=/home/$u/repos/dotfiles/ --work-tree=/home/$u config --local status.showUntrackedFiles no
 /usr/bin/git --git-dir=/home/$u/repos/dotfiles/ --work-tree=/home/$u remote add origin git@github.com:hmaier-ipb/dotfiles.git
 
-echo -e "Bare repo initalized!"
-echo -e "Add your public ssh-key (~/.ssh/id_rsa.pub) to github for push/pull."
+echo -e "Adding your public ssh key to github..."
+read -p "Enter username for github: " user
+read -p -s "Enter password for github: " pass
+
+curl -u "$user:$pass" --data '{"title":"$user@$hostname","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' https://api.github.com/user/keys
+
+echo -e "Thank you for organizing dotfiles!"
