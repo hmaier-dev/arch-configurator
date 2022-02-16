@@ -28,12 +28,15 @@ git init --bare /home/$u/repos/dotfiles
 #
 #curl -u "$user:$pass" --data '{"title":"$user@$hostname","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' https://api.github.com/$user/keys
 #
-echo -e "Writing your public ssh-key to networkshare..."
 
-if [ -f /home/$u/.ssh/id_rsa.pub ]; then
-	cp /home/$u/.ssh/id_rsa.pub /home/$u/networkshare/hmaier/linux-files/public_ssh_key.txt
-else
+echo -e "Searching for public ssh-key..."
+
+while [ ! -f /home/$u/.ssh/id_rsa.pub ]; do
 	ssh-keygen
-fi
+done
+
+echo -e "Writing your public ssh-key to networkshare..."
+cp /home/$u/.ssh/id_rsa.pub /home/$u/networkshare/hmaier/linux-files/public_ssh_key.txt
+
 
 echo -e "Thank you for organizing dotfiles!"
