@@ -84,11 +84,11 @@ cd /home/$username/
 mkdir  repos
 cd repos
 git clone https://github.com/hmaier-ipb/dotfiles.git >/dev/null 2>&1 
-install --owner=hmaier dotfiles/.config /home/$username
-install --owner=hmaier dotfiles/.bashrc /home/$username
-install --owner=hmaier dotfiles/.bash_aliases /home/$username
-install --owner=hmaier dotfiles/.ideavimrc /home/$username
-install --owner=hmaier dotfiles/.vimrc /home/$username
+install --directory --owner=hmaier --group=hmaier dotfiles/.config /home/$username
+install --owner=hmaier --group=hmaier dotfiles/.bashrc /home/$username
+install --owner=hmaier --group=hmaier dotfiles/.bash_aliases /home/$username
+install --owner=hmaier --group=hmaier dotfiles/.ideavimrc /home/$username
+install --owner=hmaier --group=hmaier dotfiles/.vimrc /home/$username
 
 
 
