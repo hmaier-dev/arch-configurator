@@ -111,6 +111,7 @@ chown -R $username /home/$username/.config
 
 cp /root/arch-configurator/bare-git.sh /home/$username
 chown $username /home/$username/bare-git.sh
+chmod +x /home/$username/bare-git.sh
 
 echo -e "Base Configuration finished."
 
@@ -148,9 +149,8 @@ chown $username /home/$username/Dokumente
 mkdir /home/$username/Bilder
 chown $username /home/$username/Bilder
 
-
-
-echo -e "You can reboot your system now."
+echo -e "Log in as $username."
+echo -e "Execute bare-git.sh in your home dir, to set up dotfiles management with git."
 echo -e "Thank you for running the arch-configurator!"
 
 shopt -u dotglob # for don't considering dot files (turn off dot files)
