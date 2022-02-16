@@ -81,33 +81,33 @@ for unit in *.automount;do
 #	systemctl start $unit
 done
 
-echo -e "Copying config files and changing permissions..."
+echo -e "Copying script for dotfiles management..."
 cd /root
-git clone https://github.com/hmaier-ipb/dotfiles.git >/dev/null 2>&1 
-
-mkdir -p /home/$username/.config/bspwm
-mkdir -p /home/$username/.config/sxhkd
-mkdir -p /home/$username/.config/nvim
-
-chown -R $username:$username /home/$username/.config/bspwm
-chown -R $username:$username /home/$username/.config/sxhkd
-chown -R $username:$username /home/$username/.config/nvim
-
-cd /home/$username/.config/bspwm
-install --owner=$username --group=$username /root/dotfiles/.config/bspwm/bspwmrc .
-
-cd /home/$username/.config/sxhkd
-install --owner=$username --group=$username /root/dotfiles/.config/sxhkd/sxhkdrc .
-
-cd /home/$username/.config/nvim
-install --owner=$username --group=$username /root/dotfiles/.config/nvim/init.vim .
-
-install --owner=$username --group=$username /root/dotfiles/.bashrc /home/$username
-install --owner=$username --group=$username /root/dotfiles/.bash_aliases /home/$username
-install --owner=$username --group=$username /root/dotfiles/.ideavimrc /home/$username
-install --owner=$username --group=$username /root/dotfiles/.vimrc /home/$username
-
-chown -R $username /home/$username/.config
+#git clone https://github.com/hmaier-ipb/dotfiles.git >/dev/null 2>&1 
+#
+#mkdir -p /home/$username/.config/bspwm
+#mkdir -p /home/$username/.config/sxhkd
+#mkdir -p /home/$username/.config/nvim
+#
+#chown -R $username:$username /home/$username/.config/bspwm
+#chown -R $username:$username /home/$username/.config/sxhkd
+#chown -R $username:$username /home/$username/.config/nvim
+#
+#cd /home/$username/.config/bspwm
+#install --owner=$username --group=$username /root/dotfiles/.config/bspwm/bspwmrc .
+#
+#cd /home/$username/.config/sxhkd
+#install --owner=$username --group=$username /root/dotfiles/.config/sxhkd/sxhkdrc .
+#
+#cd /home/$username/.config/nvim
+#install --owner=$username --group=$username /root/dotfiles/.config/nvim/init.vim .
+#
+#install --owner=$username --group=$username /root/dotfiles/.bashrc /home/$username
+#install --owner=$username --group=$username /root/dotfiles/.bash_aliases /home/$username
+#install --owner=$username --group=$username /root/dotfiles/.ideavimrc /home/$username
+#install --owner=$username --group=$username /root/dotfiles/.vimrc /home/$username
+#
+#chown -R $username /home/$username/.config
 
 cp /root/arch-configurator/bare-git.sh /home/$username
 chown $username /home/$username/bare-git.sh
