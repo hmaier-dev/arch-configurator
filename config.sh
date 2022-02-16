@@ -84,17 +84,17 @@ done
 echo -e "Copying config files and changing permissions..."
 git clone https://github.com/hmaier-ipb/dotfiles.git >/dev/null 2>&1 
 
-mkdir /home/$username/.config/bspwm
+mkdir -p /home/$username/.config/bspwm
 cd /home/$username/.config/bspwm
 chown -R $username:$username /home/$username/.config/bspwm
 install --owner=$username --group=$username dotfiles/.config/bspwmrc .
 
-mkdir /home/$username/.config/sxhkd
+mkdir -p /home/$username/.config/sxhkd
 cd /home/$username/.config/sxhkd
 chown -R $username:$username /home/$username/.config/sxhkd
 install --owner=$username --group=$username dotfiles/.config/sxhkd/sxhkdrc .
 
-mkdir /home/$username/.config/nvim
+mkdir -p /home/$username/.config/nvim
 cd /home/$username/.config/nvim
 chown -R $username:$username /home/$username/.config/nvim
 install --owner=$username --group=$username dotfiles/.config/nvim/init.vim .
@@ -104,15 +104,12 @@ install --owner=$username --group=$username dotfiles/.bash_aliases /home/$userna
 install --owner=$username --group=$username dotfiles/.ideavimrc /home/$username
 install --owner=$username --group=$username dotfiles/.vimrc /home/$username
 
-source /home/$username/.bashrc
 
 echo -e "Initalizing bare git repo for dotfiles..."
 mkdir -p /home/$username/repos/dotfiles
 git config --global init.defaultBranch main
 git init --bare /home/$username/repos/dotfiles
 /usr/bin/git --git-dir=/home/$username/repos/dotfiles/ --work-tree=/home/$username config --local status.showUntrackedFiles no
-/usr/bin/git --git-dir=/home/$username/repos/dotfiles/ --work-tree=/home/$username branch --set-upstream-to=git@github.com:hmaier-ipb/dotfiles.git
-
 
 echo -e "Base Configuration finished."
 
