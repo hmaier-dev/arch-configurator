@@ -3,6 +3,8 @@
 echo -e "------------------------------------------------------------"
 echo -e "Welcome to self-configuring Arch!"
 echo -e "Run this script only on fresh installed systems."
+echo -e "It will install my dotfiles as well as config file for:"
+echo -e "bspwm,sxhkd,neovim"
 echo -e "------------------------------------------------------------\n"
 
 shopt -s dotglob # for considering dot files (turn on dot files)
@@ -79,18 +81,30 @@ for unit in *.automount;do
 #	systemctl start $unit
 done
 
-echo -e "Copying config files..."
-cd /home/$username/
-mkdir  repos
-cd repos
+echo -e "Copying config files and changing permissions..."
 git clone https://github.com/hmaier-ipb/dotfiles.git >/dev/null 2>&1 
-install --directory --owner=hmaier --group=hmaier dotfiles/.config /home/$username
-install --owner=hmaier --group=hmaier dotfiles/.bashrc /home/$username
-install --owner=hmaier --group=hmaier dotfiles/.bash_aliases /home/$username
-install --owner=hmaier --group=hmaier dotfiles/.ideavimrc /home/$username
-install --owner=hmaier --group=hmaier dotfiles/.vimrc /home/$username
+
+mkdir /home/.config/bspwm
+cd /home/.config/bspwm
+chown -R $username:$username /home/.config/bspwm
+install --owner=$username --group=$username dotfiles/.config/bspwmrc .
+
+mkdir /home/.config/sxhkd
+cd /home/.config/sxhkd
+chown -R $username:$username /home/.config/sxhkd
+install --owner=$username --group=$username dotfiles/.config/sxhkd/sxhkdrc .
+
+mkdir /home/.config/nvim
+chown -R $username:$username /home/.config/nvim
+cd /home/.config/nvim
+install --owner=$username --group=$username dotfiles/.config/nvim/init.vim .
 
 
+install --owner=$username --group=$username dotfiles/.bashrc /home/$username/.config
+install --owner=$username --group=$username dotfiles/.bashrc /home/$username
+install --owner=$username --group=$username dotfiles/.bash_aliases /home/$username
+install --owner=$username --group=$username dotfiles/.ideavimrc /home/$username
+install --owner=$username --group=$username dotfiles/.vimrc /home/$username
 
 echo -e "Base Configuration finished."
 
@@ -113,6 +127,9 @@ p "sudo"
 echo -e "Changing the sudoers file..."
 sed -i '82i %wheel ALL=(ALL) ALL' /etc/sudoers
 sed -i '83d' /etc/sudoers
+
+echo -e "Creating .xinitrc..."
+touch /home/$username/.xinitrc
 
 echo -e "Removing the beep sound..."
 rmmod pcspkr
