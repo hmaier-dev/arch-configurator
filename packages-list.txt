@@ -1,3 +1,7 @@
+xorg
+xorg-server
+xorg-xauth
+xorg-xinit
 bspwm
 sxhkd
 exa
@@ -8,7 +12,6 @@ base-devel
 curl
 thunar
 python
-xorg-server-common
 neovim
 neovim-plug
 htop
@@ -29,7 +32,8 @@ xfce4-terminal
 neofetch
 xclip
 man-db
-xorg-xinit
 ntfs-3g
 cronie
 npm
+lightdm
+lightdm-gtk-greeter
