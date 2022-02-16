@@ -84,24 +84,32 @@ done
 echo -e "Copying config files and changing permissions..."
 cd /root
 git clone https://github.com/hmaier-ipb/dotfiles.git >/dev/null 2>&1 
+
 mkdir -p /home/$username/.config/bspwm
-cd /home/$username/.config/bspwm
-chown -R $username:$username /home/$username/.config/bspwm
-install --owner=$username --group=$username dotfiles/.config/bspwmrc .
-
 mkdir -p /home/$username/.config/sxhkd
-cd /home/$username/.config/sxhkd
-chown -R $username:$username /home/$username/.config/sxhkd
-install --owner=$username --group=$username dotfiles/.config/sxhkd/sxhkdrc .
-
 mkdir -p /home/$username/.config/nvim
-cd /home/$username/.config/nvim
+
+chown -R $username:$username /home/$username/.config/bspwm
+chown -R $username:$username /home/$username/.config/sxhkd
 chown -R $username:$username /home/$username/.config/nvim
 
+cd /home/$username/.config/bspwm
+install --owner=$username --group=$username /root/dotfiles/.config/bspwmrc .
+
+cd /home/$username/.config/sxhkd
+install --owner=$username --group=$username /root/dotfiles/.config/sxhkd/sxhkdrc .
+
+cd /home/$username/.config/nvim
 install --owner=$username --group=$username /root/dotfiles/.config/nvim/init.vim .
+
 install --owner=$username --group=$username /root/dotfiles/.bash_aliases /home/$username
 install --owner=$username --group=$username /root/dotfiles/.ideavimrc /home/$username
 install --owner=$username --group=$username /root/dotfiles/.vimrc /home/$username
+
+chown -R $username /home/$username/.config
+
+
+install --owner=$username --group=$username /root/arch-configurator/bare-git.sh home/$username
 
 echo -e "Base Configuration finished."
 
@@ -127,6 +135,7 @@ sed -i '83d' /etc/sudoers
 
 echo -e "Creating .xinitrc..."
 touch /home/$username/.xinitrc
+chown $username /home/$username/.xinitrc
 
 echo -e "Removing the beep sound..."
 rmmod pcspkr
@@ -134,8 +143,9 @@ echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
 echo -e "Creating work directorys..."
 mkdir /home/$username/Dokumente
+chown $username /home/$username/Dokumente
 mkdir /home/$username/Bilder
-
+chown $username /home/$username/Bilder
 
 
 echo -e "You can reboot your system now."
