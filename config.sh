@@ -99,7 +99,6 @@ cd /home/.config/nvim
 chown -R $username:$username /home/$username/.config/nvim
 install --owner=$username --group=$username dotfiles/.config/nvim/init.vim .
 
-install --owner=$username --group=$username dotfiles/.bashrc /home/$username/.config
 install --owner=$username --group=$username dotfiles/.bashrc /home/$username
 install --owner=$username --group=$username dotfiles/.bash_aliases /home/$username
 install --owner=$username --group=$username dotfiles/.ideavimrc /home/$username
