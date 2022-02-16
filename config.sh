@@ -86,17 +86,17 @@ git clone https://github.com/hmaier-ipb/dotfiles.git >/dev/null 2>&1
 
 mkdir /home/.config/bspwm
 cd /home/.config/bspwm
-chown -R $username:$username /home/.config/bspwm
+chown -R $username:$username /home/$username/.config/bspwm
 install --owner=$username --group=$username dotfiles/.config/bspwmrc .
 
 mkdir /home/.config/sxhkd
 cd /home/.config/sxhkd
-chown -R $username:$username /home/.config/sxhkd
+chown -R $username:$username /home/$username/.config/sxhkd
 install --owner=$username --group=$username dotfiles/.config/sxhkd/sxhkdrc .
 
 mkdir /home/.config/nvim
 cd /home/.config/nvim
-chown -R $username:$username /home/.config/nvim
+chown -R $username:$username /home/$username/.config/nvim
 install --owner=$username --group=$username dotfiles/.config/nvim/init.vim .
 
 install --owner=$username --group=$username dotfiles/.bashrc /home/$username/.config
@@ -104,6 +104,16 @@ install --owner=$username --group=$username dotfiles/.bashrc /home/$username
 install --owner=$username --group=$username dotfiles/.bash_aliases /home/$username
 install --owner=$username --group=$username dotfiles/.ideavimrc /home/$username
 install --owner=$username --group=$username dotfiles/.vimrc /home/$username
+
+source /home/$username/.bashrc
+
+echo -e "Initalizing bare git repo for dotfiles..."
+mkdir -p /home/$username/repos/dotfiles
+git init --bare /home/$username/repos/dotfiles
+git config --global init.defaultBranch main
+# dfr (DotFilesRepo) is an alias for git
+dfr config --local status.showUntrackedFiles no
+dfr pull
 
 echo -e "Base Configuration finished."
 
@@ -138,12 +148,7 @@ echo -e "Creating work directorys..."
 mkdir /home/$username/Dokumente
 mkdir /home/$username/Bilder
 
-echo -e "Initalizing bare git repo for dotfiles..."
-mkdir -p /home/$username/repos/dotfiles
-git init --bare /home/$username/repos/dotfiles
-# dfr (DotFilesRepo) is an alias for git
-dfr config --local status.showUntrackedFiles no
-dfr pull
+
 
 echo -e "You can reboot your system now."
 echo -e "Thank you for running the arch-configurator!"
