@@ -99,10 +99,10 @@ cd /home/$username/.config/nvim
 chown -R $username:$username /home/$username/.config/nvim
 install --owner=$username --group=$username dotfiles/.config/nvim/init.vim .
 
-install --owner=$username --group=$username dotfiles/.bashrc /home/$username
-install --owner=$username --group=$username dotfiles/.bash_aliases /home/$username
-install --owner=$username --group=$username dotfiles/.ideavimrc /home/$username
-install --owner=$username --group=$username dotfiles/.vimrc /home/$username
+install --owner=$username --group=$username /root/dotfiles/.bashrc /home/$username
+install --owner=$username --group=$username /root/dotfiles/.bash_aliases /home/$username
+install --owner=$username --group=$username /root/dotfiles/.ideavimrc /home/$username
+install --owner=$username --group=$username /root/dotfiles/.vimrc /home/$username
 
 
 echo -e "Initalizing bare git repo for dotfiles..."
