@@ -37,3 +37,5 @@ cronie
 npm
 lightdm
 lightdm-gtk-greeter
+ttf-jetbrains-mono
+ffmpeg
