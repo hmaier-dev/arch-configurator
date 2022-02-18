@@ -39,3 +39,4 @@ lightdm
 lightdm-gtk-greeter
 ttf-jetbrains-mono
 ffmpeg
+freerdp
