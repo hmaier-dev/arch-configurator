@@ -88,6 +88,14 @@ cp /root/arch-configurator/sync-dotfiles.sh /home/$username
 chown $username /home/$username/sync-dotfiles.sh
 chmod +x /home/$username/sync-dotfiles.sh
 
+echo -e "Copying script for workspace setup..."
+cd /root
+
+cp /root/arch-configurator/workspace-setup.sh /home/$username
+chown $username /home/$username/workspace-setup.sh
+chmod +x /home/$username/workspace-setup.sh
+
+
 echo -e "Base Configuration finished."
 
 read -e -p "Continue with packages installation? [y/n/q]" PROCEED 
