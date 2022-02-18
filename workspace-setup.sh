@@ -17,6 +17,7 @@ declare -a programs=(
 	"polybar"
 	"brave-bin"
 	"timeshift"
+	"phpstorm"
 )
 
 mkdir -p $HOME/builds
@@ -43,4 +44,5 @@ for i in ${programs[@]}; do
 	aur "$i"
 done
 
+echo -e "Thank you for installing useful programs!"
 shopt -u dotglob # for don't considering dot files (turn off dot files)
