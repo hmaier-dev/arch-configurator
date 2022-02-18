@@ -36,8 +36,8 @@ read -s -p "Enter domain password: " password
 
 echo -e "\nCreating a credentials file..."
 touch /home/$username/.isilon_access
-echo "username=$uname" >> .isilon_access
-echo "pass=$password" >> .isilon_access
+echo "username=$uname" >> /home/$username/.isilon_access
+echo "pass=$password" >> /home/$username/.isilon_access
 chmod 600 /home/$username/.isilon_access # just root can read/write this file
 
 echo -e "Creating networkshare directorys..."
@@ -101,7 +101,6 @@ while read -r i; do
 done < /root/arch-configurator/packages-list.txt
 
 #echo -e "Enabling lightdm display manager."
-#systemctl enable lightdm --quiet
 
 p "sudo"
 
@@ -123,6 +122,11 @@ mkdir /home/$username/Dokumente
 chown $username /home/$username/Dokumente
 mkdir /home/$username/Bilder
 chown $username /home/$username/Bilder
+
+echo -e "Enabling lightdm display manager..."
+systemctl enable lightdm --quiet
+sed -i "/#greeter-session=/c\greeter-session=lightdm-gtk-greeter" /etc/lightdm/lightdm.conf
+sed -i "/#display-setup-script=/c\display-setup-script=/usr/bin/setxkbmap de" /etc/lightdm/lightdm.conf
 
 echo -e "\n"
 echo -e "Now you can log in as $username!"
