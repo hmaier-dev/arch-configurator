@@ -130,6 +130,9 @@ mkdir /home/$username/Dokumente
 chown $username /home/$username/Dokumente
 mkdir /home/$username/Bilder
 chown $username /home/$username/Bilder
+mkdir /home/$username/Bilder/screenshots
+chown $username /home/$username/Bilder/screenshots
+
 
 echo -e "Enabling lightdm display manager..."
 systemctl enable lightdm --quiet
