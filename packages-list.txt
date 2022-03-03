@@ -28,6 +28,7 @@ tree
 wget
 yt-dlp
 zathura
+zathura-pdf-poppler
 xfce4-terminal
 neofetch
 xclip
