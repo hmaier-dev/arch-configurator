@@ -41,9 +41,8 @@ lightdm-gtk-greeter
 ttf-jetbrains-mono
 ffmpeg
 freerdp
-<<<<<<< HEAD
 numlockx
-=======
 udisks2
 pacman-contrib
->>>>>>> 13768c1e0690f66d0af61363f2e7f9ed068fb8b0
+arc-gtk-theme
+arc-icon-theme
