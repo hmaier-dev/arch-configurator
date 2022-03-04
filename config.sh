@@ -135,6 +135,7 @@ echo -e "Enabling lightdm display manager..."
 systemctl enable lightdm --quiet
 sed -i "/#greeter-session=/c\greeter-session=lightdm-gtk-greeter" /etc/lightdm/lightdm.conf
 sed -i "/#display-setup-script=/c\display-setup-script=/usr/bin/setxkbmap de" /etc/lightdm/lightdm.conf
+#sed -i "/#greeter-setup-script=/c\greeter-setup-script=/usr/bin/numlockx on" /etc/lightdm/lightdm.conf
 
 echo -e "\n"
 echo -e "Now you can log in as $username!"

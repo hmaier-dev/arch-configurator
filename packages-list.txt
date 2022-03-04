@@ -40,3 +40,4 @@ lightdm-gtk-greeter
 ttf-jetbrains-mono
 ffmpeg
 freerdp
+numlockx
