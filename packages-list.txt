@@ -46,3 +46,5 @@ udisks2
 pacman-contrib
 arc-gtk-theme
 arc-icon-theme
+ranger
+ueberzug
