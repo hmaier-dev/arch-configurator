@@ -19,6 +19,8 @@ p () {
 	pacman --noconfirm --needed -S $1 >/dev/null 2>&1
 }
 
+read -p "Enter the hostname for this device: " hostname
+
 read -p "Enter local username: " username
 
 read -p "Enter preferred user id [1001]: " userid
@@ -150,7 +152,9 @@ echo "[greeter]" >> /etc/lightdm/lightdm-gtk-greeter.conf
 echo "background = #5e5c64 " >> /etc/lightdm/lightdm-gtk-greeter.conf
 echo "default-user-image = /etc/lightdm/archlinux-logo.png" >> /etc/lightdm/lightdm-gtk-greeter.conf
 
-
+echo -e "Changing the hostname of this device..."
+sed -i "/#hostname/c\hostname=$hostname" /etc/dhcpcd.conf
+echo $hostname > /etc/hostname
 
 echo -e "\n"
 echo -e "Now you can log in as $username!"
