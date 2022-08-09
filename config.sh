@@ -61,7 +61,7 @@ if [ -d "/home/$username/networkshare/$uname/linux-files" ]; then
 	mount.cifs //isilon/workspace /home/$username/networkshare/AdmIn -o pass=$password,user=$uname,uid=$userid,gid=$userid
 	echo -e "Connected to public networkshares."	
 else
-	echo -e "No connection to the networkshare."
+	echo -e "No connection to the networkshare. Delete line 65 to continue."
 	exit
 fi
 
@@ -112,8 +112,15 @@ done < /root/arch-configurator/packages-list.txt
 
 #echo -e "Enabling lightdm display manager."
 
-p "sudo"
+p "opendoas"
+echo -e "Creating doas.conf"
+touch /etc/doas.conf
+echo "permit :wheel" >> /etc/doas.conf
+echo "permit setenv { XAUTHORITY LANG LC_ALL } :wheel" >> /etc/doas.conf
+chown -c root:root /etc/doas.conf
+chmod -c 0600 /etc/doas.conf
 
+p "sudo"
 # suoders file can just get changed when sudo is installed!
 echo -e "Changing the sudoers file..."
 sed -i '82i %wheel ALL=(ALL) ALL' /etc/sudoers
@@ -155,6 +162,7 @@ echo "default-user-image = /etc/lightdm/archlinux-logo.png" >> /etc/lightdm/ligh
 echo -e "Changing the hostname of this device..."
 sed -i "/#hostname/c\hostname=$hostname" /etc/dhcpcd.conf
 echo $hostname > /etc/hostname
+hostnamectl set-hostname $hostname
 
 echo -e "\n"
 echo -e "Now you can log in as $username!"
