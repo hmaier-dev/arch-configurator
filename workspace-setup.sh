@@ -31,11 +31,26 @@ aur () {
 	cd $HOME
 }
 
-echo -e "Downloading vim-plug..."
-mkdir -p $HOME/.config/nvim/plugged
+read -e -p "Do you want a [d]efault-nvim install or the [a]strovim IDE? [d/a/n/q]" PROCEED 
+PROCCED=${PROCEED:-n}
+[ $PROCCED != "y" ] && exit
+if [[ $PROCEED = "d" ]]; then
+	echo -e "Downloading vim-plug..."
+	mkdir -p $HOME/.config/nvim/plugged
 
-curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+  	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
+if [[ $PROCEED = "a" ]]; then
+	mv ~/.config/nvim ~/.config/nvim.bak
+	git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+	echo -e "\n"
+	echo -e "First open nvim with: nvim +PackerSync\n"
+	echo -e "This will download all missing plugins!"
+	sleep 5
+fi
+
 
 echo -e "Installing AUR programs..."
 
