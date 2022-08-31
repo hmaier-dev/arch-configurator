@@ -17,8 +17,11 @@ while [ ! -f /home/$u/.ssh/id_rsa.pub ]; do
 	ssh-keygen
 done
 
-echo -e "Writing your public ssh-key to networkshare..."
-cp /home/$u/.ssh/id_rsa.pub /home/$u/networkshare/hmaier/linux-files/public_ssh_key.txt
+read -e -p "Do you want to write your ssh-key to networkshare?" PROCEED 
+if [ $PROCCED != "y" ];then
+	echo -e "Writing your public ssh-key to networkshare..."
+	cp /home/$u/.ssh/id_rsa.pub /home/$u/networkshare/hmaier/linux-files/public_ssh_key.txt
+fi
 
 read -e -p "Have you copied your public ssh-key to github? [y/n/q]" PROCEED 
 PROCCED=${PROCEED:-n}
