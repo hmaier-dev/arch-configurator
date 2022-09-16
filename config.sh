@@ -171,7 +171,7 @@ done < /root/arch-configurator/packages-list.txt
 p "opendoas"
 echo -e "Creating doas.conf"
 touch /etc/doas.conf
-echo "permit :wheel" >> /etc/doas.conf
+echo "permit persist :wheel" >> /etc/doas.conf
 echo "permit setenv { XAUTHORITY LANG LC_ALL } :wheel" >> /etc/doas.conf
 echo "permit nopass hmaier as root cmd pacman" >> /etc/doas.conf
 chown -c root:root /etc/doas.conf
