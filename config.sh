@@ -77,7 +77,7 @@ connect_fritz_nas () {
 	touch /home/$username/.smbcredentials
 	echo "username=$uname" >> /home/$username/.smbcredentials
 	echo "pass=$password" >> /home/$username/.smbcredentials
-	chmod 600 /home/$username/.isilon_access # just root can read/write this file
+	chmod 600 /home/$username/.smbcredentials # just root can read/write this file
 
 	echo -e "Creating networkshare directorys..."
 	mkdir -p /home/$username/networkshare
