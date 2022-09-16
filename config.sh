@@ -115,6 +115,10 @@ connect_fritz_nas () {
 	
 }
 
+# Actual script starts!
+# Starting point
+# Beginning
+
 read -p "Enter the hostname for this device: " hostname
 read -p "Enter local username: " username
 read -p "Enter preferred user id [1001]: " userid
