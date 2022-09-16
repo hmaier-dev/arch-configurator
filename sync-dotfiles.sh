@@ -17,7 +17,7 @@ while [ ! -f /home/$u/.ssh/id_rsa.pub ]; do
 	ssh-keygen
 done
 
-read -e -p "Do you want to write your ssh-key to networkshare?" PROCEED 
+read -e -p "Do you want to write your ssh-key to networkshare? [y/n/p]" PROCEED 
 if [ $PROCCED != "y" ];then
 	echo -e "Writing your public ssh-key to networkshare..."
 	cp /home/$u/.ssh/id_rsa.pub /home/$u/networkshare/hmaier/linux-files/public_ssh_key.txt
@@ -28,7 +28,7 @@ PROCCED=${PROCEED:-n}
 [ $PROCCED != "y" ] && echo -e "Go do that!" && exit
 
 read -p "Enter your email (for git): " email
-read -p "Enter your email (for git): " name
+read -p "Enter your name (for git): " name
 
 git config --global user.email "$email"
 git config --global user.name "$name"
@@ -47,8 +47,18 @@ git clone --bare git@github.com:hmaier-ipb/dotfiles.git $HOME/repos/dotfiles
 
 /usr/bin/git --git-dir=$HOME/repos/dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 # without 'checkout' the dotfiles don't get copied... (I don't know why this works)
-/usr/bin/git --git-dir=$HOME/repos/dotfiles/ --work-tree=$HOME checkout
+# /usr/bin/git --git-dir=$HOME/repos/dotfiles/ --work-tree=$HOME checkout
 
+/usr/bin/git --git-dir=$HOME/repos/dotfiles/ --work-tree=$HOME fetch
+
+echo -e "Printing out the current git status..."
+/usr/bin/git --git-dir=$HOME/repos/dotfiles/ --work-tree=$HOME status
+
+read -e -p "Do you want to pull your config files into \$HOME? [y/n/p]" PROCEED 
+if [ $PROCCED != "y" ];then
+	/usr/bin/git --git-dir=$HOME/repos/dotfiles/ --work-tree=$HOME pull
+	/usr/bin/git --git-dir=$HOME/repos/dotfiles/ --work-tree=$HOME checkout
+fi
 
 echo -e "When tracking file into the dotfiles repo, use the alias dfr instead of git."
 echo -e "git -> dfr"

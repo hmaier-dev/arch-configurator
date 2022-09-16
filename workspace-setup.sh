@@ -33,7 +33,6 @@ aur () {
 
 read -e -p "Do you want a [d]efault-nvim install or the [a]strovim IDE? [d/a/n/q]" PROCEED 
 PROCCED=${PROCEED:-n}
-[ $PROCCED != "y" ] && exit
 if [[ $PROCEED = "d" ]]; then
 	echo -e "Downloading vim-plug..."
 	mkdir -p $HOME/.config/nvim/plugged
@@ -43,7 +42,9 @@ if [[ $PROCEED = "d" ]]; then
 fi
 
 if [[ $PROCEED = "a" ]]; then
-	mv ~/.config/nvim ~/.config/nvim.bak
+	if [ -d ~/.config/nvim ];then
+		mv ~/.config/nvim ~/.config/nvim.bak
+	fi
 	git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
 	echo -e "\n"
 	echo -e "First open nvim with: nvim +PackerSync\n"

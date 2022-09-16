@@ -4,6 +4,7 @@ xorg-xauth
 xorg-xinit
 bspwm
 sxhkd
+polybar
 exa
 rsync
 locate
