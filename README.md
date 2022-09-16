@@ -2,6 +2,8 @@
 
 ### Instructions
 
+---
+
 A little setup script for my typical arch install.
 
 1. Install Arch as you like it.
@@ -13,6 +15,8 @@ A little setup script for my typical arch install.
 4. If everything is ok with you, run config.sh and follow the instructions.
 
 ### Explanation
+
+---
 
 config.sh
 
