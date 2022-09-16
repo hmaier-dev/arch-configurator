@@ -1,5 +1,8 @@
 ### The "arch-configurator"
-A little setup script for my typical arch install. 
+
+#### Instructions
+
+A little setup script for my typical arch install.
 
 1. Install Arch as you like it.
 
@@ -7,14 +10,25 @@ A little setup script for my typical arch install.
 
 3. Run config.sh and follow the instructions.
 
-	- `config.sh`
-	
-	-> Run this script as root. It create a user, copys differnt automount units and installs packages. After running this script basic configuration is done.
+#### Explanation
 
-	- `sync-dotfiles.sh`
-	
-	-> Run this in the home directory of your new user. It creates a bare git repo, for syncing config-/dotfiles on different machines.
+---
 
-	- `packages-list.txt`
-	
-	-> No AUR packages. Is read by config.sh.
+`config.sh`
+
+Lays down the foundtion for the user.
+
+---
+
+`sync-dotfiles.sh`
+
+Sets up the `dfr`-alias and a bare git repository, which both are needed for
+synchronizing config and dotfiles between several linux machines.
+Changes will just be done in the scope of $HOME. No system files are touched.
+
+---
+
+`packages-list.txt`
+
+Stores the packages names, for `config.sh` to loop over it.
+Be sure that there are NO blank lines.

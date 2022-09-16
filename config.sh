@@ -168,6 +168,7 @@ echo -e "Creating doas.conf"
 touch /etc/doas.conf
 echo "permit :wheel" >> /etc/doas.conf
 echo "permit setenv { XAUTHORITY LANG LC_ALL } :wheel" >> /etc/doas.conf
+echo "permit nopass hmaier as root cmd pacman" >> /etc/doas.conf
 chown -c root:root /etc/doas.conf
 chmod -c 0600 /etc/doas.conf
 
