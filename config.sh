@@ -9,9 +9,6 @@ echo -e "------------------------------------------------------------\n"
 
 shopt -s dotglob # for considering dot files (turn on dot files)
 
-read -e -p "Continue with the script? [y/n/q]" PROCEED 
-PROCCED=${PROCEED:-n}
-[ $PROCCED != "y" ] && exit
 
 # no need to accept a package, don't reinstall already up to date programms, quieten the output
 p () { 
@@ -119,8 +116,12 @@ connect_fritz_nas () {
 # Starting point
 # Beginning
 
-read -p "Enter the hostname for this device: " hostname
-read -p "Enter local username: " username
+read -e -p "Continue with the script? [y/n/q]" PROCEED 
+PROCCED=${PROCEED:-n}
+[ $PROCCED != "y" ] && exit
+
+read -p "Enter the hostname for this device: " hostname 
+read -p "Enter local username: " username # this variable is needed through the script, even if a user is already created
 read -p "Enter preferred user id [1001]: " userid
 userid=${userid:-1001}
 
@@ -196,12 +197,14 @@ chown $username /home/$username/pics
 mkdir /home/$username/pics/screenshots
 chown $username /home/$username/pics/screenshots
 
+
+echo -e "Make system-wide configuration..."
+
 echo -e "Enabling lightdm display manager..."
 systemctl enable lightdm --quiet
 sed -i "/#greeter-session=/c\greeter-session=lightdm-gtk-greeter" /etc/lightdm/lightdm.conf
 sed -i "/#display-setup-script=/c\display-setup-script=/usr/bin/setxkbmap de" /etc/lightdm/lightdm.conf
 #sed -i "/#greeter-setup-script=/c\greeter-setup-script=/usr/bin/numlockx on" /etc/lightdm/lightdm.conf
-
 echo -e "Configuring lightdm..."
 
 cp /usr/share/pixmaps/archlinux-logo.png /etc/lightdm

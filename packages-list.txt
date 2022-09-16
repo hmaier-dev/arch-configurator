@@ -9,11 +9,11 @@ rsync
 locate
 bash-completion
 base-devel
+pacman-contrib
 curl
 thunar
 python
 neovim
-neovim-plug
 htop
 dmenu
 openssh
@@ -23,7 +23,6 @@ timeshift
 scrot
 feh
 pulseaudio
-teams
 tree
 wget
 yt-dlp
@@ -35,7 +34,6 @@ xclip
 man-db
 ntfs-3g
 cronie
-npm
 lightdm
 lightdm-gtk-greeter
 ttf-jetbrains-mono
@@ -43,7 +41,6 @@ ffmpeg
 freerdp
 numlockx
 udisks2
-pacman-contrib
 arc-gtk-theme
 arc-icon-theme
 ranger
