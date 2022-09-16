@@ -1,6 +1,6 @@
-### The "arch-configurator"
+## The "arch-configurator"
 
-#### Instructions
+### Instructions
 
 A little setup script for my typical arch install.
 
@@ -12,7 +12,7 @@ A little setup script for my typical arch install.
 
 4. If everything is ok with you, run config.sh and follow the instructions.
 
-#### Explanation
+### Explanation
 
 config.sh
 
