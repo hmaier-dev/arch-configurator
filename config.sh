@@ -197,7 +197,6 @@ chown $username /home/$username/pics
 mkdir /home/$username/pics/screenshots
 chown $username /home/$username/pics/screenshots
 
-
 echo -e "Make system-wide configuration..."
 
 echo -e "Enabling lightdm display manager..."
@@ -221,6 +220,10 @@ echo -e "Changing the hostname of this device..."
 sed -i "/#hostname/c\hostname=$hostname" /etc/dhcpcd.conf
 echo $hostname > /etc/hostname
 hostnamectl set-hostname $hostname
+
+echo -e "Setting $hostname's nvim-configuration system-wide..."
+mkdir -p /etc/xdg/nvim/sysinit.vim
+echo "source /home/$username/.config/nvim/init.lua" >> /etc/xdg/nvim/sysinit.vim
 
 echo -e "\n"
 echo -e "Now you can log in as $username!"
