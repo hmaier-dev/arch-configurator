@@ -33,10 +33,15 @@ read -p "Enter your name (for git): " name
 git config --global user.email "$email"
 git config --global user.name "$name"
 
-#deleting generated bashrc to prevent errors
+#deleting existing dotfiles, so git checkout can happen (git does not remove file by itself)
+echo -e "Removing already existing dotfiles..."
 rm $HOME/.bashrc
+rm $HOME/.config/user-dirs.dirs
+rm $HOME/.profile
+rm $HOME/.bash_aliases
 
-echo -e "Creating dotfile folder.."
+
+echo -e "Creating dotfiles-repo folder.."
 mkdir -p /home/$u/repos/dotfiles
 
 echo "repos/dotfiles" >> .gitignore
