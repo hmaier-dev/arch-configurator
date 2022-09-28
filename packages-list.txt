@@ -11,6 +11,8 @@ locate
 bash-completion
 base-devel
 pacman-contrib
+xfce4-terminal
+alacritty
 curl
 thunar
 python
@@ -29,7 +31,6 @@ wget
 yt-dlp
 zathura
 zathura-pdf-poppler
-xfce4-terminal
 neofetch
 xclip
 man-db
