@@ -67,6 +67,8 @@ if [ $PROCCED != "y" ];then
 	/usr/bin/git --git-dir=$HOME/repos/dotfiles/ --work-tree=$HOME pull
 	echo -e "Now checkout..."
 	/usr/bin/git --git-dir=$HOME/repos/dotfiles/ --work-tree=$HOME checkout
+	echo -e "Setting upstream..."
+	/usr/bin/git --git-dir=$HOME/repos/dotfiles/ --work-tree=$HOME push --set-upstream origin main
 fi
 
 echo -e "When tracking file into the dotfiles repo, use the alias dfr instead of git."

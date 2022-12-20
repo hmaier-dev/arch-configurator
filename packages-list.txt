@@ -48,3 +48,4 @@ arc-icon-theme
 ranger
 ueberzug
 lxappearance
+lsb-release
