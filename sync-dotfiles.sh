@@ -17,6 +17,7 @@ while [ ! -f /home/$u/.ssh/id_rsa.pub ]; do
 	ssh-keygen
 done
 
+echo -e "If you are at work, you can copy the public-key to your networkshare."
 read -e -p "Do you want to write your ssh-key to networkshare? [y/n/p]" PROCEED 
 if [ $PROCCED != "y" ];then
 	echo -e "Writing your public ssh-key to networkshare..."
@@ -36,6 +37,7 @@ git config --global user.name "$name"
 #deleting existing dotfiles, so git checkout can happen (git does not remove file by itself)
 echo -e "Removing already existing dotfiles..."
 rm $HOME/.bashrc
+rm $HOME/.bash_profile
 rm $HOME/.config/user-dirs.dirs
 rm $HOME/.profile
 rm $HOME/.bash_aliases
@@ -61,11 +63,17 @@ echo -e "Printing out the current git status..."
 
 read -e -p "Do you want to pull your config files into \$HOME? [y/n/p]" PROCEED 
 if [ $PROCCED != "y" ];then
+	echo -e "Pulling..."
 	/usr/bin/git --git-dir=$HOME/repos/dotfiles/ --work-tree=$HOME pull
+	echo -e "Now checkout..."
 	/usr/bin/git --git-dir=$HOME/repos/dotfiles/ --work-tree=$HOME checkout
 fi
 
 echo -e "When tracking file into the dotfiles repo, use the alias dfr instead of git."
 echo -e "git -> dfr"
+echo -e "\n"
+echo -e "If something didn't work use this!"
+echo -e "/usr/bin/git --git-dir=$HOME/repos/dotfiles/ --work-tree=$HOME"
+echo -e "\n"
 echo -e "Thank you for organizing dotfiles!"
 
