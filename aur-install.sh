@@ -14,7 +14,7 @@ PROCCED=${PROCEED:-n}
 [ $PROCCED != "y" ] && exit
 
 declare -a aur_programs=(
-	"nerd-fonts-source-code-pro" # This font is important for polybar
+	"nerd-fonts-source-code-pro" # This font is important for polybar. Can be replaced by community/ttf-sourcecodepro-nerd
 	"brave-bin"
 	"timeshift"
 	"phpstorm"
