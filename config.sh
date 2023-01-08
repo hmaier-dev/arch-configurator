@@ -150,9 +150,9 @@ chmod +x /home/$username/sync-dotfiles.sh
 echo -e "Copying script for workspace setup..."
 cd /root
 
-cp /root/arch-configurator/workspace-setup.sh /home/$username
-chown $username /home/$username/workspace-setup.sh
-chmod +x /home/$username/workspace-setup.sh
+cp /root/arch-configurator/aur-install.sh /home/$username
+chown $username /home/$username/aur-install.sh
+chmod +x /home/$username/aur-install.sh
 
 echo -e "Base Configuration finished."
 
