@@ -13,7 +13,7 @@ shopt -s dotglob # for considering dot files (turn on dot files)
 # no need to accept a package, don't reinstall already up to date programms, quieten the output
 p () { 
 	echo -e "Installing package: $1"
-	pacman --noconfirm --needed -S $1 >/dev/null 2>&1
+	pacman --noconfirm --needed -S "$1" >/dev/null 2>&1
 }
 connect_isilon () {
 	echo -e "For access to the isilon domain credentials are needed."	
@@ -55,7 +55,7 @@ connect_isilon () {
 	systemctl enable systemd-networkd.service --quiet
 	systemctl start systemd-networkd.service --quiet
 	# change the unit files "options=" individually?
-	cd /root/mounting-with-systemd/
+	cd /root/mounting-with-systemd/ || exit
 
 	for unit in *.automount;do
 		echo -e "Enabling service for $unit."
