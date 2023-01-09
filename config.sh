@@ -194,7 +194,7 @@ PROCCED=${PROCEED:-n}
 echo -e "Downloading packages..."
 # take care: this will also read empty lines!
 while read -r i; do
-	p "$i"
+	[ -z $i ] ||	p "$i"
 done < /root/arch-configurator/packages-list.txt
 
 echo -e "Configuring installed packages..."
