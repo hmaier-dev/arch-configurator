@@ -19,7 +19,6 @@ python
 neovim
 htop
 dmenu
-openssh
 remmina
 wmname
 timeshift

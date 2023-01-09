@@ -147,26 +147,14 @@ cp /root/arch-configurator/sync-dotfiles.sh /home/$username
 chown $username /home/$username/sync-dotfiles.sh
 chmod +x /home/$username/sync-dotfiles.sh
 
-echo -e "Copying script for workspace setup..."
+echo -e "Copying script for aur-install..."
 cd /root
 
-cp /root/arch-configurator/workspace-setup.sh /home/$username
-chown $username /home/$username/workspace-setup.sh
-chmod +x /home/$username/workspace-setup.sh
+cp /root/arch-configurator/aur-install.sh /home/$username
+chown $username /home/$username/aur-install.sh
+chmod +x /home/$username/aur-install.sh
 
 echo -e "Base Configuration finished."
-
-read -e -p "Continue with packages installation? [y/n/q]" PROCEED 
-PROCCED=${PROCEED:-n}
-[ $PROCCED != "y" ] && exit
-
-echo -e "Downloading packages..."
-# take care: this will also read empty lines!
-while read -r i; do
-	p "$i"
-done < /root/arch-configurator/packages-list.txt
-
-#echo -e "Enabling lightdm display manager."
 
 p "opendoas"
 echo -e "Creating doas.conf"
@@ -197,8 +185,19 @@ chown $username /home/$username/pics
 mkdir /home/$username/pics/screenshots
 chown $username /home/$username/pics/screenshots
 
-echo -e "Make system-wide configuration..."
+p "openssh"
 
+read -e -p "Continue with packages installation? [y/n/q]" PROCEED 
+PROCCED=${PROCEED:-n}
+[ $PROCCED != "y" ] && exit
+
+echo -e "Downloading packages..."
+# take care: this will also read empty lines!
+while read -r i; do
+	p "$i"
+done < /root/arch-configurator/packages-list.txt
+
+echo -e "Configuring installed packages..."
 echo -e "Enabling lightdm display manager..."
 systemctl enable lightdm --quiet
 sed -i "/#greeter-session=/c\greeter-session=lightdm-gtk-greeter" /etc/lightdm/lightdm.conf
