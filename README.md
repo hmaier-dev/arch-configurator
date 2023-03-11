@@ -33,6 +33,7 @@ packages-list.txt
 > Stores the packages names, for `config.sh` to loop over it.
 > Be sure that there are NO blank lines.
 
-workspace-setup.sh
+aur-install.sh
 
 > This installs some AUR-programs, as well as the AstroNvim distro for Neovim.
+> Creates `$HOME\builds` for self-build programs.
