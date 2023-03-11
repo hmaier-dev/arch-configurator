@@ -28,11 +28,9 @@ read -e -p "Have you copied your public ssh-key to github? [y/n/q]" PROCEED
 PROCCED=${PROCEED:-n}
 [ $PROCCED != "y" ] && echo -e "Go do that!" && exit
 
-read -p "Enter your email (for git): " email
-read -p "Enter your name (for git): " name
 
-git config --global user.email "$email"
-git config --global user.name "$name"
+git config --global user.email "hmaier@ipb-halle.de"
+git config --global user.name "Hendrik Maier"
 
 #deleting existing dotfiles, so git checkout can happen (git does not remove file by itself)
 echo -e "Removing already existing dotfiles..."
@@ -60,6 +58,7 @@ git clone --bare git@github.com:hmaier-ipb/dotfiles.git $HOME/repos/dotfiles
 
 echo -e "Printing out the current git status..."
 /usr/bin/git --git-dir=$HOME/repos/dotfiles/ --work-tree=$HOME status
+
 
 read -e -p "Do you want to pull your config files into \$HOME? [y/n/p]" PROCEED 
 if [ $PROCCED != "y" ];then

@@ -25,7 +25,6 @@ wmname
 timeshift
 scrot
 feh
-pulseaudio
 tree
 wget
 yt-dlp
@@ -45,7 +44,5 @@ numlockx
 udisks2
 arc-gtk-theme
 arc-icon-theme
-ranger
-ueberzug
 lxappearance
 lsb-release

@@ -147,7 +147,7 @@ cp /root/arch-configurator/sync-dotfiles.sh /home/$username
 chown $username /home/$username/sync-dotfiles.sh
 chmod +x /home/$username/sync-dotfiles.sh
 
-echo -e "Copying script for workspace setup..."
+echo -e "Copying script for installs from the AUR..."
 cd /root
 
 cp /root/arch-configurator/aur-install.sh /home/$username
@@ -160,13 +160,16 @@ read -e -p "Continue with packages installation? [y/n/q]" PROCEED
 PROCCED=${PROCEED:-n}
 [ $PROCCED != "y" ] && exit
 
+echo -e "Updating the system..."
+pacman --noconfirm --needed -Syu $1 >/dev/null 2>&1
+
 echo -e "Downloading packages..."
 # take care: this will also read empty lines!
 while read -r i; do
 	p "$i"
 done < /root/arch-configurator/packages-list.txt
 
-#echo -e "Enabling lightdm display manager."
+echo -e "Finished downloading and installing packages..."
 
 p "opendoas"
 echo -e "Creating doas.conf"
@@ -197,33 +200,45 @@ chown $username /home/$username/pics
 mkdir /home/$username/pics/screenshots
 chown $username /home/$username/pics/screenshots
 
+echo -e "Creating utility directorys..."
+mkdir -p "/home/$username/.log"
+chown $username /home/$username/.log
+
 echo -e "Make system-wide configuration..."
 
-echo -e "Enabling lightdm display manager..."
-systemctl enable lightdm --quiet
-sed -i "/#greeter-session=/c\greeter-session=lightdm-gtk-greeter" /etc/lightdm/lightdm.conf
-sed -i "/#display-setup-script=/c\display-setup-script=/usr/bin/setxkbmap de" /etc/lightdm/lightdm.conf
-#sed -i "/#greeter-setup-script=/c\greeter-setup-script=/usr/bin/numlockx on" /etc/lightdm/lightdm.conf
-echo -e "Configuring lightdm..."
+#echo -e "Enabling lightdm display manager..."
+if [ -d "/etc/lightdm" ]; then
+	systemctl enable lightdm --quiet
+	sed -i "/#greeter-session=/c\greeter-session=lightdm-gtk-greeter" /etc/lightdm/lightdm.conf
+	sed -i "/#display-setup-script=/c\display-setup-script=/usr/bin/setxkbmap de" /etc/lightdm/lightdm.conf
+	#sed -i "/#greeter-setup-script=/c\greeter-setup-script=/usr/bin/numlockx on" /etc/lightdm/lightdm.conf
+	echo -e "Configuring lightdm..."
 
-cp /usr/share/pixmaps/archlinux-logo.png /etc/lightdm
-if [ -f /etc/lightdm/lightdm-gtk-greeter.conf ];then
-	rm /etc/lightdm/lightdm-gtk-greeter.conf
+	cp /usr/share/pixmaps/archlinux-logo.png /etc/lightdm
+	if [ -f /etc/lightdm/lightdm-gtk-greeter.conf ];then
+		rm /etc/lightdm/lightdm-gtk-greeter.conf
+	fi
+
+	touch /etc/lightdm/lightdm-gtk-greeter.conf
+	echo "[greeter]" >> /etc/lightdm/lightdm-gtk-greeter.conf
+	echo "background = #5e5c64 " >> /etc/lightdm/lightdm-gtk-greeter.conf
+	echo "default-user-image = /etc/lightdm/archlinux-logo.png" >> /etc/lightdm/lightdm-gtk-greeter.conf
 fi
-
-touch /etc/lightdm/lightdm-gtk-greeter.conf
-echo "[greeter]" >> /etc/lightdm/lightdm-gtk-greeter.conf
-echo "background = #5e5c64 " >> /etc/lightdm/lightdm-gtk-greeter.conf
-echo "default-user-image = /etc/lightdm/archlinux-logo.png" >> /etc/lightdm/lightdm-gtk-greeter.conf
 
 echo -e "Changing the hostname of this device..."
 sed -i "/#hostname/c\hostname=$hostname" /etc/dhcpcd.conf
 echo $hostname > /etc/hostname
 hostnamectl set-hostname $hostname
 
-echo -e "Setting $hostname's nvim-configuration system-wide..."
+echo -e "Setting $hostname's vim-configuration system-wide..."
 mkdir -p /etc/xdg/nvim/sysinit.vim
-echo "source /home/$username/.config/nvim/init.lua" >> /etc/xdg/nvim/sysinit.vim
+echo "source /home/$username/.vim/vimrc" >> /etc/xdg/nvim/sysinit.vim
+
+echo -e "Copy xinitrc into \$HOME..."
+cp /etc/X11/xinit/xinitrc /home/$username/.xinitrc
+
+chown $username /home/$username/.xinitrc
+
 
 echo -e "\n"
 echo -e "Now you can log in as $username!"
