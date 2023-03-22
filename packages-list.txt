@@ -45,3 +45,4 @@ arc-gtk-theme
 arc-icon-theme
 lxappearance
 lsb-release
+ristretto
