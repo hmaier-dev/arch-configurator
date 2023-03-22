@@ -29,7 +29,7 @@ configure-boot () {
     img="amd-ucode.img"
   fi
 
-  read -e -p "Is your root-partition labeled as: 'root'! [y/n/q]" PROCEED 
+  read -e -p "Is your root-partition labeled as: 'root'? [y/n/q]" PROCEED 
   PROCCED=${PROCEED:-n}
   [ $PROCCED == "q" ] && exit
   if [ $PROCCED == "n" ]; then
@@ -52,7 +52,6 @@ configure-boot () {
   bootctl install
 
 }
-
 
 read -e -p "Do you want to use systemd-boot? [y/n/q]" PROCEED 
 PROCCED=${PROCEED:-n}

@@ -237,8 +237,11 @@ echo "source /home/$username/.vim/vimrc" >> /etc/xdg/nvim/sysinit.vim
 echo -e "Copy xinitrc into \$HOME..."
 cp /etc/X11/xinit/xinitrc /home/$username/.xinitrc
 
-chown $username /home/$username/.xinitrc
+echo -e "By default xinit starts bspwm!"
+echo "setxkbmap de" >> /home/$username/.xinitrc
+echo "exec bspwm" >> /home/$username/.xinitrc
 
+chown $username /home/$username/.xinitrc
 
 echo -e "\n"
 echo -e "Now you can log in as $username!"
