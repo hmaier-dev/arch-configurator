@@ -7,6 +7,10 @@ echo -e "Your root-partition must be labeled 'root'."
 echo -e "BEWARE: THIS SCRIPT IS NOT TESTED!"
 echo -e "------------------------------------------------------------\n"
 
+## If you have problems with dual-booting arch and windows
+## check out the following link:
+## https://github.com/spxak1/weywot/blob/main/Pop_OS_Dual_Boot.md
+
 p () { 
 	echo -e "Installing package: $1"
 	pacman --noconfirm --needed -S $1 >/dev/null 2>&1
