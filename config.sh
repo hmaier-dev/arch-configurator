@@ -225,6 +225,9 @@ if [ -d "/etc/lightdm" ]; then
 	echo "default-user-image = /etc/lightdm/archlinux-logo.png" >> /etc/lightdm/lightdm-gtk-greeter.conf
 fi
 
+echo -e "Set the system clock to local to sync windows and linux..."
+timedatectl set-local-rtc 1 --adjust-system-clock
+
 echo -e "Changing the hostname of this device..."
 sed -i "/#hostname/c\hostname=$hostname" /etc/dhcpcd.conf
 echo $hostname > /etc/hostname
