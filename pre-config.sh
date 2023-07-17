@@ -17,7 +17,8 @@ p () {
 }
 
 configure-boot () {
-  
+
+  mkdir -p /boot/loader/entries
   cd /boot/loader/entries
   touch arch.conf
 
