@@ -171,6 +171,9 @@ done < /root/arch-configurator/packages-list.txt
 
 echo -e "Finished downloading and installing packages..."
 
+p "openssh"
+systemctl enable sshd.service
+
 p "opendoas"
 echo -e "Creating doas.conf"
 touch /etc/doas.conf
