@@ -37,3 +37,9 @@ aur-install.sh
 
 > This installs some AUR-programs, as well as the AstroNvim distro for Neovim.
 > Creates `$HOME\builds` for self-build programs.
+
+### Roadmaps - Bullet-Point
+
+- Automate `systemd-networkd` and `systemd-resolved` configuration in a single file
+- Seperate configuration of network shares into a single file
+- Implement idempotency (https://search.brave.com/search?q=idempotency), for multiple runs of a script producing the same output
