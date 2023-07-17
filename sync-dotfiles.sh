@@ -48,7 +48,7 @@ echo "repos/dotfiles" >> .gitignore
 
 echo -e "Creating bare git repo..."
 git config --global init.defaultBranch main
-git clone --bare git@github.com:hmaier-ipb/dotfiles.git $HOME/repos/dotfiles
+git clone --bare git@github.com:hmaier-dev/dotfiles.git $HOME/repos/dotfiles
 
 /usr/bin/git --git-dir=$HOME/repos/dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 # without 'checkout' the dotfiles don't get copied... (I don't know why this works)
