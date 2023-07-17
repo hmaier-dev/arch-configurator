@@ -43,3 +43,4 @@ aur-install.sh
 - Automate `systemd-networkd` and `systemd-resolved` configuration in a single file
 - Seperate configuration of network shares into a single file
 - Implement idempotency (https://search.brave.com/search?q=idempotency), for multiple runs of a script producing the same output
+- Automate the pre-installation in `arch-chroot` -> systemd-boot + dns (resolved) + dhcp (networkd)
