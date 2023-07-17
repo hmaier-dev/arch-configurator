@@ -35,14 +35,14 @@ useradd -m --uid 1001 -G wheel $username
 echo -e "Changing password of $username"
 passwd $username
 
-echo -e "Copying script for dotfiles management..."
+echo -e "Copying script for dotfiles management to $username's \$HOME..."
 cd /root
 
 cp /root/arch-configurator/sync-dotfiles.sh /home/$username
 chown $username /home/$username/sync-dotfiles.sh
 chmod +x /home/$username/sync-dotfiles.sh
 
-echo -e "Copying script for installs from the AUR..."
+echo -e "Copying script for installs from the AUR to $username's \$HOME..."
 cd /root
 
 cp /root/arch-configurator/aur-install.sh /home/$username
@@ -66,9 +66,11 @@ done < /root/arch-configurator/packages-list.txt
 
 echo -e "Finished downloading and installing packages..."
 
+echo -e "Enabling SSH..."
 p "openssh"
 systemctl enable sshd.service
 
+echo -e "Configuring doas..."
 p "opendoas"
 echo -e "Creating doas.conf"
 touch /etc/doas.conf
@@ -78,11 +80,27 @@ echo "permit nopass hmaier as root cmd pacman" >> /etc/doas.conf
 chown -c root:root /etc/doas.conf
 chmod -c 0600 /etc/doas.conf
 
+echo -e "Configuring sudo..."
 p "sudo"
 # suoders file can just get changed when sudo is installed!
 echo -e "Changing the sudoers file..."
 sed -i '82i %wheel ALL=(ALL) ALL' /etc/sudoers
 sed -i '83d' /etc/sudoers
+
+echo -e "Setting up dhcp and dns..."
+systemctl enable systemd-networkd
+systemctl enable systemd-resolved
+
+ip addr
+ip link show
+read -p "Please enter the name of your connected interface: " interface
+
+touch /etc/systemd/network/20-wired.network
+echo "[Match]" >> /etc/systemd/network/20-wired.network
+echo "Name=$interface " >> /etc/systemd/network/20-wired.network
+echo " " >> /etc/systemd/network/20-wired.network
+echo "[Network]" >> /etc/systemd/network/20-wired.network
+echo "DHCP=yes" >> /etc/systemd/network/20-wired.network
 
 echo -e "Creating .xinitrc..."
 touch /home/$username/.xinitrc
