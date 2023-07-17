@@ -34,7 +34,7 @@ configure-boot () {
     img="amd-ucode.img"
   fi
 
-  read -e -p "Is your root-partition labeled as: 'root'? [y/n/q]" PROCEED 
+  read -e -p "Is your root-partition labeled as: 'ROOT'? [y/n/q]" PROCEED 
   PROCCED=${PROCEED:-n}
   [ $PROCCED == "q" ] && exit
   if [ $PROCCED == "n" ]; then
@@ -50,7 +50,7 @@ configure-boot () {
     linux   /vmlinuz-linux
     initrd  /$img
     initrd  /initramfs-linux.img
-    options root="LABEL=root" rw
+    options root="LABEL=ROOT" rw
     " >> arch.conf
 
   echo -e "Installing systemd-boot"...
