@@ -1,3 +1,12 @@
+read -e -p "Are you at [h]ome or at [w]ork? [h/w/n/q]" PROCEED 
+PROCCED=${PROCEED:-n}
+if [[ $PROCCED = "w" ]]; then
+	connect_isilon
+fi
+if [[ $PROCCED = "h"  ]]; then
+	connect_fritz_nas
+fi
+
 connect_isilon () {
 	echo -e "For access to the isilon domain credentials are needed."	
 	read -p "Enter domain username: " uname
