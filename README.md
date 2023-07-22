@@ -4,15 +4,9 @@
 
 ---
 
-A little setup script for my typical arch install.
+1. Partition and `pacstrap` your system.
 
-1. Install Arch as you like it.
-
-2. Clone this repository into /root/
-
-3. Be sure to read config.sh, to be clear what it exactly does. It set an comment `Starting point` to search for the beginning of the actual script.
-
-4. If everything is ok with you, run config.sh and follow the instructions.
+2. Clone this repository into `/root/`. 
 
 ### Explanation
 
@@ -20,7 +14,7 @@ A little setup script for my typical arch install.
 
 config.sh
 
-> Lays down the foundtion for the user.
+> Everything user-based will configured here.
 
 sync-dotfiles.sh
 
@@ -31,12 +25,19 @@ sync-dotfiles.sh
 packages-list.txt
 
 > Stores the packages names, for `config.sh` to loop over it.
-> Be sure that there are NO blank lines.
+> Be sure that there are **NO blank lines**.
 
 aur-install.sh
 
 > This installs some AUR-programs, as well as the AstroNvim distro for Neovim.
 > Creates `$HOME\builds` for self-build programs.
+
+network.sh
+> Enables DNS and DHCP as systemd-services.
+
+share.sh
+> Setup known networkshares.
+
 
 ### Roadmaps - Bullet-Point
 
