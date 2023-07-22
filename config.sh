@@ -28,9 +28,11 @@ PROCEED=${PROCEED:-n}
 [ $PROCEED != "y" ] && exit
 
 read -p "Enter the hostname for this device: " hostname 
-read -p "Enter local username: " username # this variable is needed through the script, even if a user is already created
-read -p "Enter preferred user id [1001]: " userid
-userid=${userid:-1001}
+# read -p "Enter local username: " username # this variable is needed through the script, even if a user is already created
+username=hmaier
+# read -p "Enter preferred user id [1001]: " userid
+userid=1001
+# userid=${userid:-1001}
 
 echo -e "Creating User..."
 useradd -m --uid 1001 -G wheel $username
