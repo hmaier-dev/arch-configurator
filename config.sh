@@ -3,8 +3,6 @@
 echo -e "------------------------------------------------------------"
 echo -e "Welcome to self-configuring Arch!"
 echo -e "Run this script only on fresh installed systems."
-echo -e "It will install my dotfiles as well as config files for:"
-echo -e "bspwm,sxhkd,neovim"
 echo -e "------------------------------------------------------------\n"
 
 shopt -s dotglob # for considering dot files (turn on dot files)
@@ -19,6 +17,11 @@ p () {
 # Actual script starts!
 # Starting point
 # Beginning
+
+if [[ $EUID -ne 0  ]]; then
+	echo "Run this as root."
+	exit 1
+fi
 
 read -e -p "Continue with the script? [y/n/q]" PROCEED 
 PROCCED=${PROCEED:-n}
