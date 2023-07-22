@@ -24,8 +24,8 @@ if [[ $EUID -ne 0  ]]; then
 fi
 
 read -e -p "Continue with the script? [y/n/q]" PROCEED 
-PROCCED=${PROCEED:-n}
-[ $PROCCED != "y" ] && exit
+PROCEED=${PROCEED:-n}
+[ $PROCEED != "y" ] && exit
 
 read -p "Enter the hostname for this device: " hostname 
 read -p "Enter local username: " username # this variable is needed through the script, even if a user is already created
