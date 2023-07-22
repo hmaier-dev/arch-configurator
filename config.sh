@@ -90,20 +90,6 @@ echo -e "Changing the sudoers file..."
 sed -i '82i %wheel ALL=(ALL) ALL' /etc/sudoers
 sed -i '83d' /etc/sudoers
 
-echo -e "Setting up dhcp and dns..."
-systemctl enable systemd-networkd
-systemctl enable systemd-resolved
-
-ip addr
-ip link show
-read -p "Please enter the name of your connected interface: " interface
-
-touch /etc/systemd/network/20-wired.network
-echo "[Match]" >> /etc/systemd/network/20-wired.network
-echo "Name=$interface " >> /etc/systemd/network/20-wired.network
-echo " " >> /etc/systemd/network/20-wired.network
-echo "[Network]" >> /etc/systemd/network/20-wired.network
-echo "DHCP=yes" >> /etc/systemd/network/20-wired.network
 
 echo -e "Creating .xinitrc..."
 touch /home/$username/.xinitrc
