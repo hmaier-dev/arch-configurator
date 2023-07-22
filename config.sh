@@ -55,8 +55,8 @@ chmod +x /home/$username/aur-install.sh
 echo -e "Base Configuration finished."
 
 read -e -p "Continue with packages installation? [y/n/q]" PROCEED 
-PROCCED=${PROCEED:-n}
-[ $PROCCED != "y" ] && exit
+PROCEED=${PROCEED:-n}
+[ $PROCEED != "y" ] && exit
 
 echo -e "Updating the system..."
 pacman --noconfirm --needed -Syu $1 >/dev/null 2>&1
@@ -89,7 +89,6 @@ p "sudo"
 echo -e "Changing the sudoers file..."
 sed -i '82i %wheel ALL=(ALL) ALL' /etc/sudoers
 sed -i '83d' /etc/sudoers
-
 
 echo -e "Creating .xinitrc..."
 touch /home/$username/.xinitrc
@@ -134,11 +133,12 @@ echo -e "Set the system clock to local to sync windows and linux..."
 timedatectl set-local-rtc 1 --adjust-system-clock
 
 echo -e "Changing the hostname of this device..."
+touch /etc/dhcpcd.conf
 sed -i "/#hostname/c\hostname=$hostname" /etc/dhcpcd.conf
 echo $hostname > /etc/hostname
 hostnamectl set-hostname $hostname
 
-echo -e "Setting $hostname's vim-configuration system-wide..."
+echo -e "Setting $username's vim-configuration system-wide..."
 mkdir -p /etc/xdg/nvim/sysinit.vim
 echo "source /home/$username/.vim/vimrc" >> /etc/xdg/nvim/sysinit.vim
 
