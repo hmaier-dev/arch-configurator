@@ -29,7 +29,7 @@ PROCCED=${PROCEED:-n}
 [ $PROCCED != "y" ] && echo -e "Go do that!" && exit
 
 
-git config --global user.email "hmaier@ipb-halle.de"
+git config --global user.email "hendrik_maier@protonmail.com"
 git config --global user.name "Hendrik Maier"
 
 #deleting existing dotfiles, so git checkout can happen (git does not remove file by itself)
