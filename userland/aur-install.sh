@@ -5,8 +5,6 @@ shopt -s dotglob
 echo -e "------------------------------------------------------------\n"
 echo -e "Hello $USER!"
 echo -e "This script will setup your default workspace."
-echo -e "It will setup (n)vim and install AUR/git-packages like:"
-echo -e "brave-bin, timeshift, polybar"
 echo -e "------------------------------------------------------------\n"
 
 read -e -p "Continue with the script? [y/n/q]" PROCEED 
@@ -20,14 +18,16 @@ declare -a aur_programs=(
 	"phpstorm"
 )
 
-mkdir -p $HOME/builds
+builds="/home/$USER/builds"
+
+mkdir -p $builds
 
 aur () {
 	read -e -p "Do you really want to install $1 [y/n/q]" PROCEED 
 	PROCCED=${PROCEED:-n}
 	if [[ $PROCEED = "y" ]]; then
 		echo -e "Installing program: $1"
-  	cd $HOME/builds
+		cd $builds
 		git clone https://aur.archlinux.org/$1.git
 		cd $1
 		# add this for error suppression: >/dev/null 2>&1 

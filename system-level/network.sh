@@ -28,3 +28,6 @@ echo "Name=$interface " >> /etc/systemd/network/20-wired.network
 echo " " >> /etc/systemd/network/20-wired.network
 echo "[Network]" >> /etc/systemd/network/20-wired.network
 echo "DHCP=yes" >> /etc/systemd/network/20-wired.network
+
+systemctl restart systemd-networkd
+systemctl restart systemd-resolved
