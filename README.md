@@ -1,47 +1,24 @@
 ## The "arch-configurator"
 
+This collection of shell-scripts will guide me through a typical Arch-install.
+
 ### Instructions
 
----
+Boot right into the iso and clone this repo. 
+Everything the `system-level`-folder must be done as root.
+Read every script to know what it does.
 
-1. Partition and `pacstrap` your system.
+1. Partition your system and mount it for pacstrap.
 
-2. Clone this repository into `/root/`. 
+2. Run `pacstrap -K /mnt base linux linux-firmware vim nvim`
 
-### Explanation
-
----
-
-config.sh
-
-> Everything user-based will configured here.
-
-sync-dotfiles.sh
-
-> Sets up the `dfr`-alias and a bare git repository, which both are needed for
-> synchronizing config and dotfiles between several linux machines.
-> Changes will just be done in the scope of $HOME. No system files are touched.
-
-packages-list.txt
-
-> Stores the packages names, for `config.sh` to loop over it.
-> Be sure that there are **NO blank lines**.
-
-aur-install.sh
-
-> This installs some AUR-programs, as well as the AstroNvim distro for Neovim.
-> Creates `$HOME\builds` for self-build programs.
-
-network.sh
-> Enables DNS and DHCP as systemd-services.
-
-share.sh
-> Setup known networkshares.
+3. Clone this repository into `/mnt/root/`. 
 
 
 ### Roadmaps - Bullet-Point
 
 - Automate `systemd-networkd` and `systemd-resolved` configuration in a single file
+- Parition the system: 512M EFI + max. 250G ROOT
 - Seperate configuration of network shares into a single file
 - Implement idempotency (https://search.brave.com/search?q=idempotency), for multiple runs of a script producing the same output
 - Automate the pre-installation in `arch-chroot` -> systemd-boot + dns (resolved) + dhcp (networkd)

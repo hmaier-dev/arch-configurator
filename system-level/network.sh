@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo -e "------------------------------------------------------------"
+echo -e "Welcome to \"setting-up-the-network\" on Arch!"
+echo -e "Run this before your first boot in arch-chroot."
+echo -e "------------------------------------------------------------\n"
+
 if [[ $EUID -ne 0  ]]; then
 	echo "Run this as root."
 	exit 1
@@ -10,8 +15,8 @@ FORWARD=${FORWARD:-n}
 [ $FORWARD != "y" ] && exit
 
 echo -e "Setting up dhcp and dns..."
-# systemctl enable systemd-networkd
-# systemctl enable systemd-resolved
+systemctl enable systemd-networkd
+systemctl enable systemd-resolved
 FORWARD=n
 while [ "$FORWARD" == "n" ]; do
 	ip addr
