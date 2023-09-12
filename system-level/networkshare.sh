@@ -1,3 +1,13 @@
+echo -e "------------------------------------------------------------"
+echo -e "This script is optional and only run for NAS/SAN connection."
+echo -e "Run as root for access to the system-directorys."
+echo -e "------------------------------------------------------------\n"
+
+if [[ $EUID -ne 0  ]]; then
+	echo "Run this as root."
+	exit 1
+fi
+
 read -e -p "Are you at [h]ome or at [w]ork? [h/w/n/q]" PROCEED 
 PROCCED=${PROCEED:-n}
 if [[ $PROCCED = "w" ]]; then

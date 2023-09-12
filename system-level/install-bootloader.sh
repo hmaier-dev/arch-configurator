@@ -1,9 +1,8 @@
 #!/bin/bash
 echo -e "------------------------------------------------------------"
-echo -e "Welcome to the pre-configuration of the"
-echo -e "Arch-Configurator!"
-echo -e "This script shall be run before first booting up the system."
-echo -e "Your root-partition must be labeled 'root'."
+echo -e "Welcome to installing your bootloader."
+echo -e "Definitly run this in arch-chroot."
+echo -e "Your root-partition must be labeled 'ROOT'."
 echo -e "BEWARE: THIS SCRIPT IS NOT TESTED!"
 echo -e "------------------------------------------------------------\n"
 

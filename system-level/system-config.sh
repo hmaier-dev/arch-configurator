@@ -2,7 +2,9 @@
 
 echo -e "------------------------------------------------------------"
 echo -e "Welcome to self-configuring Arch!"
-echo -e "Run this script only on fresh installed systems."
+echo -e "Run this script after doing pacstrap or"
+echo -e "on your first boot."
+echo -e "Please only run on fresh installs."
 echo -e "------------------------------------------------------------\n"
 
 shopt -s dotglob # for considering dot files (turn on dot files)
