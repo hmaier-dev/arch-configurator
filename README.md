@@ -16,16 +16,16 @@ For your own safety, read every script to understand what it does.
 
 You can now start with the installation.
 
-1. Partition your system and mount it for pacstrap.
+1. Partition your system (with `cfdisk`, `mkfs.fat -F 32 -n <label>` and `mkfs.ext4 -L <label>`) and mount it for pacstrap.
 
 2. Run `pacstrap -K /mnt base linux linux-firmware vim nvim`
 
-3. Copy this repository into `/mnt/root/`. 
+3. Copy this repository from `/root` into `/mnt/root/`, so you can use the scripts on your first boot.
 
 4. `arch-chroot` into `/mnt`. You can now setup the bootloader, network and the system itself.
 
 
-### Roadmaps - Bullet-Point
+### Roadmap
 
 - Automate `systemd-networkd` and `systemd-resolved` configuration in a single file
 - Parition the system: 512M EFI + max. 250G ROOT
