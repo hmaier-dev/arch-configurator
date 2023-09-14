@@ -69,7 +69,7 @@ echo -e "Downloading packages..."
 # take care: this will also read empty lines!
 while read -r i; do
 	p "$i"
-done < /root/arch-configurator/packages-list.txt
+done < ../packages-list.txt # test if this works!
 
 echo -e "Finished downloading and installing packages..."
 
