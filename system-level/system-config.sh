@@ -36,11 +36,15 @@ username=hmaier
 userid=1001
 # userid=${userid:-1001}
 
-echo -e "Creating User..."
-useradd -m --uid 1001 -G wheel $username
+if id "$username" &>/dev/null ;then
+	echo -e "Creating User..."
+	useradd -m --uid 1001 -G wheel $username
 
-echo -e "Changing password of $username"
-passwd $username
+	echo -e "Changing password of $username"
+	passwd $username
+else
+	echo -e "$username already exist."
+fi
 
 echo -e "Copying script for dotfiles management to $username's \$HOME..."
 cd /root
