@@ -98,15 +98,11 @@ else
 	echo -e "$username already exist."
 fi
 
-echo -e "Copying script for dotfiles management to $username's \$HOME..."
-cd /root
+echo -e "Copying userland-scripts..."
 
 cp ../userland/sync-dotfiles.sh /home/$username
 chown $username /home/$username/sync-dotfiles.sh
 chmod +x /home/$username/sync-dotfiles.sh
-
-echo -e "Copying script for installs from the AUR to $username's \$HOME..."
-cd /root
 
 cp ../userland/aur-install.sh /home/$username
 chown $username /home/$username/aur-install.sh
@@ -125,7 +121,6 @@ echo -e "Downloading packages..."
 for pkg in "${pkgs[@]}"; do
 	p "$pkg"
 done
-
 
 echo -e "Finished downloading and installing packages..."
 
@@ -198,9 +193,9 @@ sed -i "/#hostname/c\hostname=$hostname" /etc/dhcpcd.conf
 echo $hostname > /etc/hostname
 hostnamectl set-hostname $hostname
 
-echo -e "Setting $username's vim-configuration system-wide..."
-mkdir -p /etc/xdg/nvim/sysinit.vim
-echo "source /home/$username/.vim/vimrc" >> /etc/xdg/nvim/sysinit.vim
+# echo -e "Setting $username's vim-configuration system-wide..."
+# mkdir -p /etc/xdg/nvim/sysinit.vim
+# echo "source /home/$username/.vim/vimrc" >> /etc/xdg/nvim/sysinit.vim
 
 echo -e "Copy xinitrc into \$HOME..."
 cp /etc/X11/xinit/xinitrc /home/$username/.xinitrc
