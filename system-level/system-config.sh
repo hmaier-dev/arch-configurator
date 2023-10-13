@@ -16,6 +16,57 @@ p () {
 	pacman --noconfirm --needed -S $1 >/dev/null 2>&1
 }
 
+pkgs=(
+	"xorg"
+	"xorg-server"
+	"xorg-xauth"
+	"xorg-xinit"
+	"bspwm"
+	"sxhkd"
+	"polybar"
+	"exa"
+	"rsync"
+	"locate"
+	"bash-completion"
+	"base-devel"
+	"pacman-contrib"
+	"xfce4-terminal"
+	"alacritty"
+	"curl"
+	"thunar"
+	"python"
+	"neovim"
+	"htop"
+	"dmenu"
+	"remmina"
+	"wmname"
+	"timeshift"
+	"scrot"
+	"feh"
+	"tree"
+	"wget"
+	"yt-dlp"
+	"zathura"
+	"zathura-pdf-poppler"
+	"neofetch"
+	"xclip"
+	"man-db"
+	"ntfs-3g"
+	"cronie"
+	"lightdm"
+	"lightdm-gtk-greeter"
+	"ttf-jetbrains-mono"
+	"ffmpeg"
+	"freerdp"
+	"numlockx"
+	"udisks2"
+	"arc-gtk-theme"
+	"arc-icon-theme"
+	"lxappearance"
+	"lsb-release"
+	"ristretto"
+)
+
 # Actual script starts!
 # Starting point
 # Beginning
@@ -30,6 +81,7 @@ PROCEED=${PROCEED:-n}
 [ $PROCEED != "y" ] && exit
 
 read -p "Enter the hostname for this device: " hostname 
+
 # read -p "Enter local username: " username # this variable is needed through the script, even if a user is already created
 username=hmaier
 # read -p "Enter preferred user id [1001]: " userid
@@ -49,14 +101,14 @@ fi
 echo -e "Copying script for dotfiles management to $username's \$HOME..."
 cd /root
 
-cp /root/arch-configurator/sync-dotfiles.sh /home/$username
+cp ../userland/sync-dotfiles.sh /home/$username
 chown $username /home/$username/sync-dotfiles.sh
 chmod +x /home/$username/sync-dotfiles.sh
 
 echo -e "Copying script for installs from the AUR to $username's \$HOME..."
 cd /root
 
-cp /root/arch-configurator/aur-install.sh /home/$username
+cp ../userland/aur-install.sh /home/$username
 chown $username /home/$username/aur-install.sh
 chmod +x /home/$username/aur-install.sh
 
@@ -70,10 +122,10 @@ echo -e "Updating the system..."
 pacman --noconfirm --needed -Syu $1 >/dev/null 2>&1
 
 echo -e "Downloading packages..."
-# take care: this will also read empty lines!
-while read -r i; do
-	p "$i"
-done < ../packages-list.txt # test if this works!
+for pkg in "${pkgs[@]}"; do
+	p "$pkg"
+done
+
 
 echo -e "Finished downloading and installing packages..."
 
