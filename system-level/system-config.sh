@@ -17,54 +17,57 @@ p () {
 }
 
 pkgs=(
+	"alacritty"
+	"arc-gtk-theme"
+	"arc-icon-theme"
+	"base-devel"
+	"bash-completion"
+	"bspwm"
+	"cronie"
+	"curl"
+	"dmenu"
+	"exa"
+	"feh"
+	"ffmpeg"
+	"freerdp"
+	"htop"
+	"lightdm"
+	"lightdm-gtk-greeter"
+	"locate"
+	"lsb-release"
+	"lxappearance"
+	"man-db"
+	"neofetch"
+	"neovim"
+	"ntfs-3g"
+	"numlockx"
+	"pacman-contrib"
+	"polybar"
+	"pulseaudio"
+	"python"
+	"remmina"
+	"ristretto"
+	"rsync"
+	"scrot"
+	"sxhkd"
+	"thunar"
+	"timeshift"
+	"tree"
+	"ttf-jetbrains-mono"
+	"udisks2"
+	"wget"
+	"keepassxc"
+	"syncthing"
+	"wmname"
+	"xclip"
+	"xfce4-terminal"
 	"xorg"
 	"xorg-server"
 	"xorg-xauth"
 	"xorg-xinit"
-	"bspwm"
-	"sxhkd"
-	"polybar"
-	"exa"
-	"rsync"
-	"locate"
-	"bash-completion"
-	"base-devel"
-	"pacman-contrib"
-	"xfce4-terminal"
-	"alacritty"
-	"curl"
-	"thunar"
-	"python"
-	"neovim"
-	"htop"
-	"dmenu"
-	"remmina"
-	"wmname"
-	"timeshift"
-	"scrot"
-	"feh"
-	"tree"
-	"wget"
 	"yt-dlp"
 	"zathura"
 	"zathura-pdf-poppler"
-	"neofetch"
-	"xclip"
-	"man-db"
-	"ntfs-3g"
-	"cronie"
-	"lightdm"
-	"lightdm-gtk-greeter"
-	"ttf-jetbrains-mono"
-	"ffmpeg"
-	"freerdp"
-	"numlockx"
-	"udisks2"
-	"arc-gtk-theme"
-	"arc-icon-theme"
-	"lxappearance"
-	"lsb-release"
-	"ristretto"
 )
 
 # Actual script starts!
@@ -91,22 +94,12 @@ userid=1001
 if id "$username" &>/dev/null ;then
 	echo -e "Creating User..."
 	useradd -m --uid 1001 -G wheel $username
-
 	echo -e "Changing password of $username"
 	passwd $username
 else
 	echo -e "$username already exist."
 fi
 
-echo -e "Copying userland-scripts..."
-
-cp ../userland/sync-dotfiles.sh /home/$username
-chown $username /home/$username/sync-dotfiles.sh
-chmod +x /home/$username/sync-dotfiles.sh
-
-cp ../userland/aur-install.sh /home/$username
-chown $username /home/$username/aur-install.sh
-chmod +x /home/$username/aur-install.sh
 
 echo -e "Base Configuration finished."
 
@@ -159,9 +152,20 @@ chown $username /home/$username/pics
 mkdir /home/$username/pics/screenshots
 chown $username /home/$username/pics/screenshots
 
-echo -e "Creating utility directorys..."
-mkdir -p "/home/$username/.log"
-chown $username /home/$username/.log
+# I don't know what is this for???
+# echo -e "Creating utility directorys..."
+# mkdir -p "/home/$username/.log"
+# chown $username /home/$username/.log
+
+echo -e "Copying userland-scripts..."
+
+cp ../userland/sync-dotfiles.sh /home/$username
+chown $username /home/$username/sync-dotfiles.sh
+chmod +x /home/$username/sync-dotfiles.sh
+
+cp ../userland/aur-install.sh /home/$username
+chown $username /home/$username/aur-install.sh
+chmod +x /home/$username/aur-install.sh
 
 echo -e "Make system-wide configuration..."
 
@@ -186,6 +190,8 @@ fi
 
 echo -e "Set the system clock to local to sync windows and linux..."
 timedatectl set-local-rtc 1 --adjust-system-clock
+echo -e "Activate time-server..."
+timedatectl set-ntp 1
 
 echo -e "Changing the hostname of this device..."
 touch /etc/dhcpcd.conf
