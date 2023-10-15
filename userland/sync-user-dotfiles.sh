@@ -12,10 +12,10 @@ PROCCED=${PROCEED:-n}
 
 u=$USER
 
-echo -e "Searching for public ssh-key..."
-while [ ! -f /home/$u/.ssh/id_rsa.pub ]; do
-	ssh-keygen
-done
+#echo -e "Searching for public ssh-key..."
+#while [ ! -f /home/$u/.ssh/id_rsa.pub ]; do
+#	ssh-keygen
+#done
 
 echo -e "If you are at work, you can copy the public-key to your networkshare."
 read -e -p "Do you want to write your ssh-key to networkshare? [y/n/p]" PROCEED 
