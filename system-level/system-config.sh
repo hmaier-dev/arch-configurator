@@ -159,9 +159,10 @@ chown $username /home/$username/pics
 mkdir /home/$username/pics/screenshots
 chown $username /home/$username/pics/screenshots
 
-echo -e "Creating utility directorys..."
-mkdir -p "/home/$username/.log"
-chown $username /home/$username/.log
+# Don't know what this is for...
+# echo -e "Creating utility directorys..."
+# mkdir -p "/home/$username/.log"
+# chown $username /home/$username/.log
 
 echo -e "Make system-wide configuration..."
 
