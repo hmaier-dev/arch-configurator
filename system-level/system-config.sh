@@ -31,6 +31,7 @@ pkgs=(
 	"feh"
 	"ffmpeg"
 	"freerdp"
+	"duf"
 	"htop"
 	"lightdm"
 	"lightdm-gtk-greeter"
