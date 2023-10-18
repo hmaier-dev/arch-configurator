@@ -3,6 +3,7 @@
 echo -e "------------------------------------------------------------"
 echo -e "Welcome to \"setting-up-the-network\" on Arch!"
 echo -e "Run this before your first boot in arch-chroot."
+echo -e "systemd-networkd and systemd-resolved are just for ip and dns."
 echo -e "------------------------------------------------------------\n"
 
 if [[ $EUID -ne 0  ]]; then
@@ -13,6 +14,11 @@ fi
 read -e -p "Continue with the script? [y/n/q]" FORWARD
 FORWARD=${FORWARD:-n}
 [ $FORWARD != "y" ] && exit
+
+
+read -p "Enter the hostname for this device: " hostname 
+echo $hostname > /etc/hostname
+hostnamectl set-hostname $hostname
 
 echo -e "Setting up dhcp and dns..."
 systemctl enable systemd-networkd
