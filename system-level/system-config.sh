@@ -26,6 +26,7 @@ pkgs=(
 	"cronie"
 	"curl"
 	"dmenu"
+	"bc"
 	"exa"
 	"feh"
 	"ffmpeg"
@@ -83,8 +84,6 @@ read -e -p "Continue with the script? [y/n/q]" PROCEED
 PROCEED=${PROCEED:-n}
 [ $PROCEED != "y" ] && exit
 
-read -p "Enter the hostname for this device: " hostname 
-
 # read -p "Enter local username: " username # this variable is needed through the script, even if a user is already created
 username=hmaier
 # read -p "Enter preferred user id [1001]: " userid
@@ -99,7 +98,6 @@ if id "$username" &>/dev/null ;then
 else
 	echo -e "$username already exist."
 fi
-
 
 echo -e "Base Configuration finished."
 
@@ -169,35 +167,15 @@ chmod +x /home/$username/aur-install.sh
 
 echo -e "Make system-wide configuration..."
 
-#echo -e "Enabling lightdm display manager..."
-if [ -d "/etc/lightdm" ]; then
-	systemctl enable lightdm --quiet
-	sed -i "/#greeter-session=/c\greeter-session=lightdm-gtk-greeter" /etc/lightdm/lightdm.conf
-	sed -i "/#display-setup-script=/c\display-setup-script=/usr/bin/setxkbmap de" /etc/lightdm/lightdm.conf
-	#sed -i "/#greeter-setup-script=/c\greeter-setup-script=/usr/bin/numlockx on" /etc/lightdm/lightdm.conf
-	echo -e "Configuring lightdm..."
-
-	cp /usr/share/pixmaps/archlinux-logo.png /etc/lightdm
-	if [ -f /etc/lightdm/lightdm-gtk-greeter.conf ];then
-		rm /etc/lightdm/lightdm-gtk-greeter.conf
-	fi
-
-	touch /etc/lightdm/lightdm-gtk-greeter.conf
-	echo "[greeter]" >> /etc/lightdm/lightdm-gtk-greeter.conf
-	echo "background = #5e5c64 " >> /etc/lightdm/lightdm-gtk-greeter.conf
-	echo "default-user-image = /etc/lightdm/archlinux-logo.png" >> /etc/lightdm/lightdm-gtk-greeter.conf
-fi
-
 echo -e "Set the system clock to local to sync windows and linux..."
 timedatectl set-local-rtc 1 --adjust-system-clock
 echo -e "Activate time-server..."
 timedatectl set-ntp 1
 
-echo -e "Changing the hostname of this device..."
-touch /etc/dhcpcd.conf
-sed -i "/#hostname/c\hostname=$hostname" /etc/dhcpcd.conf
-echo $hostname > /etc/hostname
-hostnamectl set-hostname $hostname
+# This does not work
+# echo -e "Enabling pacman-repo: multilib..."
+# sed -i 's/#[multilib]/[multilib]/g' /etc/pacman.conf
+# sed -i 's/#Include = /etc/pacman.d/mirrorlist/Include = /etc/pacman.d/mirrorlist/g' /etc/pacman.conf
 
 # echo -e "Setting $username's vim-configuration system-wide..."
 # mkdir -p /etc/xdg/nvim/sysinit.vim
