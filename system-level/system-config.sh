@@ -28,6 +28,7 @@ pkgs=(
 	"dmenu"
 	"bc"
 	"exa"
+	"fzf"
 	"feh"
 	"ffmpeg"
 	"freerdp"
