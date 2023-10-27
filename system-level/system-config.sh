@@ -36,6 +36,7 @@ pkgs=(
 	"htop"
 	"lightdm"
 	"lightdm-gtk-greeter"
+	"lightdm-gtk-greeter-settings"
 	"locate"
 	"lsb-release"
 	"lxappearance"
@@ -173,6 +174,11 @@ echo -e "Set the system clock to local to sync windows and linux..."
 timedatectl set-local-rtc 1 --adjust-system-clock
 echo -e "Activate time-server..."
 timedatectl set-ntp 1
+
+echo -e "Set keymap and locale..."
+localectl set-x11-keymap de
+localectl set-locale LANG=de_DE.UTF-8
+localectl set-keymap de-latin1
 
 # This does not work
 # echo -e "Enabling pacman-repo: multilib..."

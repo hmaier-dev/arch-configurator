@@ -16,6 +16,7 @@ declare -a aur_programs=(
 	"brave-bin"
 	"timeshift"
 	"phpstorm"
+	"pandoc-bin"
 )
 
 builds="/home/$USER/builds"
