@@ -55,6 +55,8 @@ pkgs=(
 	"scrot"
 	"sxhkd"
 	"thunar"
+	"thunar-archive-plugin"
+	"thunar-volman"
 	"timeshift"
 	"tree"
 	"ttf-jetbrains-mono"
