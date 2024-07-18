@@ -23,6 +23,10 @@ You can now start with the installation.
 
 3. Copy this repository from `/root` into `/mnt/root/`, so you can use the scripts on your first boot.
 
+```bash
+cp -r /root/arch-configurator /mnt/root/arch-configurator
+```
+
 4. `arch-chroot` into `/mnt`. You can now setup the bootloader, network and the system itself.
 
 ### Ansible
