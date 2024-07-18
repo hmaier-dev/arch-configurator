@@ -24,11 +24,3 @@ You can now start with the installation.
 
 4. `arch-chroot` into `/mnt`. You can now setup the bootloader, network and the system itself.
 
-
-### Roadmap
-
-- Automate `systemd-networkd` and `systemd-resolved` configuration in a single file
-- Parition the system: 512M EFI + max. 250G ROOT
-- Seperate configuration of network shares into a single file
-- Implement idempotency (https://search.brave.com/search?q=idempotency), for multiple runs of a script producing the same output
-- Automate the pre-installation in `arch-chroot` -> systemd-boot + dns (resolved) + dhcp (networkd)
