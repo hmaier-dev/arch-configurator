@@ -9,75 +9,6 @@ echo -e "------------------------------------------------------------\n"
 
 shopt -s dotglob # for considering dot files (turn on dot files)
 
-
-# no need to accept a package, don't reinstall already up to date programms, quieten the output
-p () { 
-	echo -e "Installing package: $1"
-	pacman --noconfirm --needed -S $1 >/dev/null 2>&1
-}
-
-pkgs=(
-	"alacritty"
-	"arc-gtk-theme"
-	"arc-icon-theme"
-	"base-devel"
-	"bash-completion"
-	"bc"
-	"bspwm"
-	"cronie"
-	"curl"
-	"dmenu"
-	"duf"
-	"exa"
-	"feh"
-	"ffmpeg"
-	"freerdp"
-	"fzf"
-	"grml-zsh-config"
-	"htop"
-	"keepassxc"
-	"lightdm"
-	"lightdm-gtk-greeter"
-	"lightdm-gtk-greeter-settings"
-	"locate"
-	"lsb-release"
-	"lxappearance"
-	"man-db"
-	"neofetch"
-	"neovim"
-	"ntfs-3g"
-	"numlockx"
-	"pacman-contrib"
-	"polybar"
-	"pulseaudio"
-	"python"
-	"remmina"
-	"ristretto"
-	"rsync"
-	"scrot"
-	"sxhkd"
-	"syncthing"
-	"thunar"
-	"thunar-archive-plugin"
-	"thunar-volman"
-	"timeshift"
-	"tree"
-	"ttf-jetbrains-mono"
-	"udisks2"
-	"wget"
-	"wmname"
-	"xclip"
-	"xfce4-terminal"
-	"xorg"
-	"xorg-server"
-	"xorg-xauth"
-	"xorg-xinit"
-	"yt-dlp"
-	"zathura"
-	"zathura-pdf-poppler"
-	"zsh"
-)
-
 # Actual script starts!
 # Starting point
 # Beginning
@@ -107,20 +38,6 @@ else
 fi
 
 echo -e "Base Configuration finished."
-
-read -e -p "Continue with packages installation? [y/n/q]" PROCEED 
-PROCEED=${PROCEED:-n}
-[ $PROCEED != "y" ] && exit
-
-echo -e "Updating the system..."
-pacman --noconfirm --needed -Syu $1 >/dev/null 2>&1
-
-echo -e "Downloading packages..."
-for pkg in "${pkgs[@]}"; do
-	p "$pkg"
-done
-
-echo -e "Finished downloading and installing packages..."
 
 echo -e "Enabling SSH..."
 p "openssh"
