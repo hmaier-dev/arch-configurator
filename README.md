@@ -9,7 +9,8 @@ At first, boot into the ISO and change the keyboard-layout with
 * `loadkeys de`
 * `loadkeys de-latin1`
 
-After this step, you can clone this repo.
+**After this step, you can clone this repo.**
+
 Everything in `system-level`, modifies the system and therefore must be run as root.
 Changes to the user-profile are done by the scripts in `userland`. Do not run them as root.
 For your own safety, read every script to understand what it does. 
