@@ -24,3 +24,12 @@ You can now start with the installation.
 
 4. `arch-chroot` into `/mnt`. You can now setup the bootloader, network and the system itself.
 
+### Ansible
+
+Run ansible-playbooks from the root of the repository.
+
+``` bash
+ansible-playbook -i inventory.ini userland/<playbook>.yml
+```
+
+
